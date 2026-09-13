@@ -686,7 +686,7 @@
             explanation: "해설 [19p]: '모든 면에 자기 말을 자신의 목적에 적합하도록 왜곡되게 사용할 것이다. 그는 자기 말의 뜻을 잘못 해석할 것이며... 말의 참 뜻을 왜곡하며'라고 지적합니다."
           },
           {
-            q: "하나님께서 인간에게 성경을 주신 방식에 대하여 '성경에 대한 반대 이론들'(19p)에서 설명한 문장은 무엇입니까?",
+            q: "하나님께서 인간에게 성경을 주신 방식에 대하여 '성경에 대한 반대 이론들'(19p)에서 성경에 관해 설명한 문장은 무엇입니까?",
             options: [
               "단절되지 않은 계속적인 말씀의 고리를 잇는 형식으로 단번에 주셨다.",
               "성경은 단절되지 않은 계속적인 말씀의 고리를 잇는 형식으로 인간에게 주신 것이 아니며, 계승되는 세대들을 통하여 적절한 기회를 발견하실 때마다 부분적으로 주신 것이다.",
@@ -818,7 +818,7 @@
             explanation: "해설 [25p]: '“말씀이 육신이 되어 우리 가운데 거”(요 1:14)하셨다는 말씀은 그리스도께 뿐 아니라 성경에도 적용된다'라고 설명합니다."
           },
           {
-            q: "경고와 견책의 증언을 보낼 때, 교 교 교교인들이 \"그 증언은 단순히 화잇 자매의 의견에 불과하다\"고 말하는 행위에 대해 화잇 여사는 어떻게 지적했습니까?",
+            q: "경고와 견책의 증언을 보낼 때, 교인들이 \"그 증언은 단순히 화잇 자매의 의견에 불과하다\"고 말하는 행위에 대해 화잇 여사는 어떻게 지적했습니까?",
             options: [
               "성도들의 자유로운 개인적 의사 표현이다.",
               "이처럼 그대들은 하나님의 영을 모욕하였다.",
@@ -831,7 +831,7 @@
           {
             q: "화잇 여사가 자신이 쓴 서신과 증언의 출처와 성격에 대하여 27페이지에서 선포한 공식 문장은 무엇입니까?",
             options: [
-              "나는 교 교 교교단의 발전을 위하여 내 개인적인 의견과 교훈을 썼다.",
+              "나는 교단의 발전을 위하여 내 개인적인 의견과 교훈을 썼다.",
               "나는 지면에 단 한가지의 기사도 단순히 내 자신의 개인적 의견을 표현하기 위하여 글을 쓰지 않는다. 내가 쓴 서신과 증언들은 모두 하나님께서 계시를 통해 나에게 보여주신 것이다.",
               "내가 쓴 글 중 일부는 남편과 아들의 의견을 반영한 것이다.",
               "나는 성경 주석가들의 글을 종합하여 개인적 서신을 만들었다."
@@ -1185,31 +1185,39 @@
     }
 
     function submitShortAnswer() {
-      const userInput = shortInput.value.trim();
-      if (!userInput) return;
+  const userInput = shortInput.value.trim();
+  if (!userInput) return;
 
-      clearInterval(timerInterval);
-      const rawQ = activeQuestions[currentQIndex];
-      shortInput.disabled = true;
-      document.getElementById('short-submit-btn').disabled = true;
+  clearInterval(timerInterval);
+  const rawQ = activeQuestions[currentQIndex];
+  shortInput.disabled = true;
+  document.getElementById('short-submit-btn').disabled = true;
 
-      const cleanInput = userInput.replace(/\s+/g, '').toLowerCase();
-      const isCorrect = rawQ.shortAnswers.some(ans => cleanInput === ans.replace(/\s+/g, '').toLowerCase());
+  const cleanInput = userInput.replace(/\s+/g, '').toLowerCase();
 
-      const expBox = document.getElementById('explanation-box');
-      if (isCorrect) {
-        score++;
-        removeCorrectQuestionFromStorage(rawQ.id);
-        expBox.innerText = `🎉 정답입니다! (입력: ${userInput})\n\n${rawQ.explanation}`;
-      } else {
-        roundWrongQuestions.push(rawQ);
-        saveWrongQuestionToStorage(rawQ);
-        expBox.innerText = `❌ 아쉽습니다! (입력: ${userInput})\n정답: ${rawQ.displayAnswer}\n\n${rawQ.explanation}`;
-      }
+  // shortAnswers 배열이 누락되었을 경우 객관식 정답 텍스트를 기본 정답으로 안전하게 참조
+  const defaultAnswerText = (rawQ.options && rawQ.options[rawQ.answer]) ? rawQ.options[rawQ.answer] : "";
+  const validAnswers = (Array.isArray(rawQ.shortAnswers) && rawQ.shortAnswers.length > 0)
+    ? rawQ.shortAnswers
+    : [defaultAnswerText];
 
-      expBox.style.display = 'block';
-      document.getElementById('next-btn').classList.remove('hidden');
-    }
+  const isCorrect = validAnswers.some(ans => cleanInput === String(ans).replace(/\s+/g, '').toLowerCase());
+  const correctAnswerDisplay = rawQ.displayAnswer || defaultAnswerText;
+
+  const expBox = document.getElementById('explanation-box');
+  if (isCorrect) {
+    score++;
+    if (rawQ.id) removeCorrectQuestionFromStorage(rawQ.id);
+    expBox.innerText = `🎉 정답입니다! (입력: ${userInput})\n\n${rawQ.explanation || ''}`;
+  } else {
+    roundWrongQuestions.push(rawQ);
+    saveWrongQuestionToStorage(rawQ);
+    expBox.innerText = `❌ 오답입니다! (입력: ${userInput})\n정답: ${correctAnswerDisplay}\n\n${rawQ.explanation || ''}`;
+  }
+
+  expBox.style.display = 'block';
+  document.getElementById('next-btn').classList.remove('hidden');
+}
 
     document.getElementById('next-btn').onclick = () => {
       currentQIndex++;

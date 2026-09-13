@@ -34,17 +34,42 @@
     }
     header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       border-bottom: 2px solid #eaeff3;
       padding-bottom: 16px;
     }
     h1 { font-size: 1.4rem; color: var(--primary-color); word-break: keep-all; }
     p.subtitle { font-size: 0.85rem; color: #666; margin-top: 4px; }
     
+    /* 퀴즈 헤더 네비게이션 */
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover {
+      background: #eaeff3;
+      color: var(--primary-color);
+    }
+
     .btn {
       display: block;
       width: 100%;
-      padding: 14px 16px;
+      padding: 13px 16px;
       margin: 8px 0;
       background: #ffffff;
       border: 1.5px solid #d0d7de;
@@ -69,6 +94,26 @@
     .btn-primary:hover {
       background: var(--primary-hover);
     }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      text-align: center;
+      border: 1.5px solid #cbd5e1;
+      font-weight: 600;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+    .btn-danger {
+      background: #fff5f5;
+      color: var(--incorrect-color);
+      text-align: center;
+      border: 1.5px solid #ffcdd2;
+      font-weight: 600;
+    }
+    .btn-danger:hover {
+      background: #ffebee;
+    }
     
     .progress-bar {
       height: 8px;
@@ -85,7 +130,7 @@
     }
     
     .question-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       margin-bottom: 16px;
       word-break: keep-all;
@@ -116,13 +161,39 @@
     
     .result-box {
       text-align: center;
-      padding: 20px 0;
+      padding: 10px 0;
     }
     .score-num {
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: bold;
       color: var(--primary-color);
-      margin: 12px 0;
+      margin: 10px 0;
+    }
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    /* 오답 리뷰 리스트 스타일 */
+    .review-item {
+      text-align: left;
+      border-top: 1px solid #e2e8f0;
+      padding: 14px 0;
+      font-size: 0.9rem;
+    }
+    .review-q {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .review-ans {
+      color: var(--correct-color);
+      margin-bottom: 4px;
+    }
+    .review-exp {
+      color: #64748b;
+      font-size: 0.85rem;
     }
   </style>
 </head>
@@ -141,6 +212,12 @@
 
     <!-- 2. 퀴즈 진행 화면 -->
     <div id="quiz-screen" class="hidden">
+      <div class="quiz-nav">
+        <button class="nav-btn" onclick="confirmExitToChapter()">
+          ← 목차로 나가기
+        </button>
+        <span id="quiz-mode-badge" style="font-size: 0.8rem; color: #64748b;">일반 풀이</span>
+      </div>
       <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
       <div id="question-number" style="font-size: 0.85rem; color: #666; margin-bottom: 8px;"></div>
       <div id="question-text" class="question-title"></div>
@@ -154,15 +231,25 @@
       <div class="result-box">
         <h2>퀴즈 완료!</h2>
         <div id="score-text" class="score-num">0 / 0</div>
-        <p id="result-msg" style="margin-bottom: 20px;"></p>
-        <button onclick="showChapterScreen()" class="btn btn-primary">다른 장 선택하기</button>
+        <p id="result-msg" style="margin-bottom: 16px;"></p>
+        
+        <div class="result-actions">
+          <button id="retry-wrong-btn" onclick="startWrongOnlyQuiz()" class="btn btn-danger hidden">오답만 다시 풀기</button>
+          <button onclick="retryCurrentQuiz()" class="btn btn-secondary">전체 다시 풀기</button>
+          <button id="toggle-review-btn" onclick="toggleWrongReview()" class="btn btn-secondary hidden">오답 노트 확인하기</button>
+          <button onclick="showChapterScreen()" class="btn btn-primary">다른 장 선택하기</button>
+        </div>
+
+        <!-- 오답 상세 검토 목록 -->
+        <div id="review-container" class="hidden" style="margin-top: 24px; text-align: left;">
+          <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--incorrect-color);">틀린 문제 목록</h3>
+          <div id="review-list"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // 퀴즈 데이터 (새로운 장이 추가되면 이 데이터 구조에 맞춰 추가하시면 됩니다)
-    
     const quizData = {
       "ch1": {
         title: "제1장: 우리 길에 비취는 빛",
@@ -510,12 +597,13 @@
         ]
       }
     };
-            
 
-
-    let currentChapter = null;
+    let currentChapterKey = null;
+    let activeQuestions = [];
     let currentQIndex = 0;
     let score = 0;
+    let wrongQuestions = [];
+    let isWrongMode = false;
 
     const chapterScreen = document.getElementById('chapter-screen');
     const quizScreen = document.getElementById('quiz-screen');
@@ -525,6 +613,7 @@
       chapterScreen.classList.remove('hidden');
       quizScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
+      document.getElementById('review-container').classList.add('hidden');
       
       const listEl = document.getElementById('chapter-list');
       listEl.innerHTML = '';
@@ -538,10 +627,39 @@
       });
     }
 
+    function confirmExitToChapter() {
+      if (confirm("문제를 푸는 도중입니다. 목차 화면으로 나가시겠습니까?")) {
+        showChapterScreen();
+      }
+    }
+
     function startQuiz(chapterKey) {
-      currentChapter = quizData[chapterKey];
+      currentChapterKey = chapterKey;
+      activeQuestions = [...quizData[chapterKey].questions];
+      isWrongMode = false;
+      resetAndLoadQuiz();
+    }
+
+    function retryCurrentQuiz() {
+      activeQuestions = [...quizData[currentChapterKey].questions];
+      isWrongMode = false;
+      resetAndLoadQuiz();
+    }
+
+    function startWrongOnlyQuiz() {
+      if (wrongQuestions.length === 0) return;
+      activeQuestions = [...wrongQuestions];
+      isWrongMode = true;
+      resetAndLoadQuiz();
+    }
+
+    function resetAndLoadQuiz() {
       currentQIndex = 0;
       score = 0;
+      wrongQuestions = [];
+      
+      document.getElementById('quiz-mode-badge').innerText = isWrongMode ? "오답 복습 모드" : "일반 풀이";
+      document.getElementById('review-container').classList.add('hidden');
       
       chapterScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
@@ -551,11 +669,12 @@
     }
 
     function loadQuestion() {
-      const qData = currentChapter.questions[currentQIndex];
-      const totalQ = currentChapter.questions.length;
+      const qData = activeQuestions[currentQIndex];
+      const totalQ = activeQuestions.length;
+      const chapterTitle = quizData[currentChapterKey].title;
       
       document.getElementById('progress-fill').style.width = `${((currentQIndex) / totalQ) * 100}%`;
-      document.getElementById('question-number').innerText = `${currentChapter.title} — 문제 ${currentQIndex + 1} / ${totalQ}`;
+      document.getElementById('question-number').innerText = `${chapterTitle} — 문제 ${currentQIndex + 1} / ${totalQ}`;
       document.getElementById('question-text').innerText = qData.q;
       
       const optionsContainer = document.getElementById('options-container');
@@ -571,25 +690,26 @@
         const btn = document.createElement('button');
         btn.className = 'btn option-btn';
         btn.innerText = `${idx + 1}. ${opt}`;
-        btn.onclick = () => selectOption(idx, qData.answer, qData.explanation);
+        btn.onclick = () => selectOption(idx, qData);
         optionsContainer.appendChild(btn);
       });
     }
 
-    function selectOption(selectedIdx, correctIdx, explanation) {
+    function selectOption(selectedIdx, qData) {
       const buttons = document.querySelectorAll('.option-btn');
       buttons.forEach(btn => btn.disabled = true);
       
-      if (selectedIdx === correctIdx) {
+      if (selectedIdx === qData.answer) {
         buttons[selectedIdx].classList.add('correct');
         score++;
       } else {
         buttons[selectedIdx].classList.add('incorrect');
-        buttons[correctIdx].classList.add('correct');
+        buttons[qData.answer].classList.add('correct');
+        wrongQuestions.push(qData);
       }
       
       const expBox = document.getElementById('explanation-box');
-      expBox.innerText = explanation;
+      expBox.innerText = qData.explanation;
       expBox.style.display = 'block';
       
       document.getElementById('next-btn').classList.remove('hidden');
@@ -597,7 +717,7 @@
 
     document.getElementById('next-btn').onclick = () => {
       currentQIndex++;
-      if (currentQIndex < currentChapter.questions.length) {
+      if (currentQIndex < activeQuestions.length) {
         loadQuestion();
       } else {
         showResult();
@@ -608,7 +728,7 @@
       quizScreen.classList.add('hidden');
       resultScreen.classList.remove('hidden');
       
-      const total = currentChapter.questions.length;
+      const total = activeQuestions.length;
       document.getElementById('score-text').innerText = `${score} / ${total}`;
       
       const pct = (score / total) * 100;
@@ -618,6 +738,47 @@
       else msg = "다시 한번 복습하고 도전해보세요!";
       
       document.getElementById('result-msg').innerText = msg;
+
+      const retryWrongBtn = document.getElementById('retry-wrong-btn');
+      const toggleReviewBtn = document.getElementById('toggle-review-btn');
+      
+      if (wrongQuestions.length > 0) {
+        retryWrongBtn.classList.remove('hidden');
+        retryWrongBtn.innerText = `오답만 다시 풀기 (${wrongQuestions.length}문제)`;
+        toggleReviewBtn.classList.remove('hidden');
+        buildReviewList();
+      } else {
+        retryWrongBtn.classList.add('hidden');
+        toggleReviewBtn.classList.add('hidden');
+      }
+    }
+
+    function buildReviewList() {
+      const reviewList = document.getElementById('review-list');
+      reviewList.innerHTML = '';
+      
+      wrongQuestions.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'review-item';
+        div.innerHTML = `
+          <div class="review-q">${idx + 1}. ${item.q}</div>
+          <div class="review-ans">정답: ${item.options[item.answer]}</div>
+          <div class="review-exp">${item.explanation}</div>
+        `;
+        reviewList.appendChild(div);
+      });
+    }
+
+    function toggleWrongReview() {
+      const container = document.getElementById('review-container');
+      const btn = document.getElementById('toggle-review-btn');
+      if (container.classList.contains('hidden')) {
+        container.classList.remove('hidden');
+        btn.innerText = "오답 노트 닫기";
+      } else {
+        container.classList.add('hidden');
+        btn.innerText = "오답 노트 확인하기";
+      }
     }
 
     showChapterScreen();

@@ -449,10 +449,10 @@
           <span>🎯 <strong>문제 유형</strong></span>
           <div class="mode-select-group">
             <label class="mode-radio-label">
-              <input type="radio" name="quiz-type" value="multiple" checked> 객관식
+              <input type="radio" name="quiz-type" value="multiple" checked onchange="renderChapterList()"> 객관식
             </label>
             <label class="mode-radio-label">
-              <input type="radio" name="quiz-type" value="short"> 단답형
+              <input type="radio" name="quiz-type" value="short" onchange="renderChapterList()"> 단답형
             </label>
           </div>
         </div>
@@ -562,9 +562,10 @@
 
     const quizData = {
       "ch1_part1": {
-        title: "제1장 Part 1: 영감과 성경의 권위 (pp. 15~39) — 30문항 정밀 퀴즈",
+        title: "제1장 Part 1: 영감과 성경의 권위 (pp. 15~39)",
         questions: [
           {
+            id: "ch1_p1_1",
             q: "가려뽑은기별 1권 제1장 서두(15p)에서 화잇 여사는 성경을 해석함에 있어서 회의주의와 불신 사상이 나타나는 시대를 경고하며 예수님의 어떤 말씀(눅 18:8)을 인용합니까?",
             options: [
               "인자가 올 때에 세상에서 믿음을 보겠느냐",
@@ -573,9 +574,12 @@
               "수고하고 무거운 짐진 자들아 다 내게로 오라"
             ],
             answer: 0,
+            shortAnswers: ["믿음을 보겠느냐", "세상에서 믿음을 보겠느냐", "인자가 올 때에 세상에서 믿음을 보겠느냐"],
+            displayAnswer: "인자가 올 때에 세상에서 믿음을 보겠느냐",
             explanation: "해설 [15p]: 15페이지 첫 문장에서 '지금 이 때야말로 \"인자가 올 때에 세상에서 믿음을 보겠느냐\"(눅 18:8)고 물어보아야 할 가장 적절한 때이다'라고 시작합니다."
           },
           {
+            id: "ch1_p1_2",
             q: "주님께서 기적적인 능력으로 거룩한 책(성경)을 오늘날의 형태로 보존하시어 타락한 인간 가족에게 주신 목적은 무엇입니까?",
             options: [
               "세상적인 학문과 과학의 우수성을 증명하기 위하여",
@@ -587,6 +591,7 @@
             explanation: "해설 [15p]: '이 책은 인간 가족들에게 천국으로 인도하는 길을 보여 주기 위하여 주신 하나의 도표이며 안내서이다'라고 밝힙니다."
           },
           {
+            id: "ch1_p1_3",
             q: "성경에 기록된 말씀보다 더 지혜로운 척하며 성경의 모순을 스스로 시정하려고 마음먹은 사람들의 그릇된 제의 표현은 무엇입니까?",
             options: [
               "\"오직 성경으로만 돌아가자\"",
@@ -598,6 +603,7 @@
             explanation: "해설 [16p]: '\"주님께서 이런 뜻으로 말씀하셨을 것이다\" 혹은 \"주님께서 이렇게 말씀하셨으면 더욱 좋았을 것이다\"는 등의 제의로써 성경을 개선할 수 있는 사람은 아무도 없다'고 경고합니다."
           },
           {
+            id: "ch1_p1_4",
             q: "성경을 베끼거나 번역하는 과정에서 필사자나 번역자가 어떤 실수를 저질렀을 가능성에 대해 엘렌 화잇이 명확히 해명한 바는 무엇입니까?",
             options: [
               "약간의 번역 실수가 있으면 성경의 모든 구절은 신뢰를 잃게 된다.",
@@ -609,6 +615,7 @@
             explanation: "해설 [16p]: '(성경을 베끼거나 번역하는 일에 실수가 있었다 하더라도) 이런 모든 실수들이 영혼을 위태롭게 하거나... 가장 밝히 드러난 진리가 난해한 것이 되게 하지도 않을 것이다'라고 기록되어 있습니다."
           },
           {
+            id: "ch1_p1_5",
             q: "유한한 인간이 자신의 한정된 표준으로 성경의 어느 부분은 영감되었고 어느 부분은 아니라고 측정하려는 태도에 대하여 선지자는 어떤 모습을 취해야 한다고 권고합니까?",
             options: [
               "학문적 우월성을 마음껏 자랑해야 한다.",
@@ -617,9 +624,12 @@
               "새로운 번역본을 만들어 스스로 정당성을 입증해야 한다."
             ],
             answer: 1,
+            shortAnswers: ["얼굴을 가리워야 한다", "얼굴을 가리움", "얼굴"],
+            displayAnswer: "얼굴을 가리워야 함 (엘리야처럼)",
             explanation: "해설 [17p]: '마치 엘리야가 세미한 소리를 들었을 때처럼 하나님과 거룩한 천사들의 목전에서 얼굴을 가리워야 할 것이다(왕상 19:12)'라고 지적합니다."
           },
           {
+            id: "ch1_p1_6",
             q: "하나님께서 숨은 신비들을 해명시키거나 영감으로 된 부분과 그렇지 않은 부분을 최종적으로 판단할 자격에 대하여 명시하신 바는 무엇입니까?",
             options: [
               "대총회 지도자들에게만 판단할 자격을 주셨다.",
@@ -631,6 +641,7 @@
             explanation: "해설 [17p]: '한 사람 혹은 어떤 분야의 사람들에게 영감으로 된 부분과 그렇지 않은 부분을 최종적으로 판단할 자격을 아무에게도 주시지 않으셨다'라고 명확히 선언합니다."
           },
           {
+            id: "ch1_p1_7",
             q: "성경 전체의 영감성에 대하여 엘렌 화잇 본인이 1888년 미네아폴리스에서 선포한 공식적인 신앙 고백은 무엇입니까?",
             options: [
               "나는 성경의 교리적인 부분만 영감된 말씀으로 받아들인다.",
@@ -639,9 +650,12 @@
               "나는 영감 여부를 인간의 이성으로 가려낸 후에 받아들인다."
             ],
             answer: 1,
+            shortAnswers: ["성경 전체", "성경전체"],
+            displayAnswer: "성경 전체가 영감으로 된 말씀임을 믿음",
             explanation: "해설 [17p]: '나는 성경을 영감으로 기록된 말씀으로서 그대로 받아들인다. 또한 나는 성경 전체가 영감으로 된 말씀임을 믿는다'라는 문장이 정확한 원문 표현입니다."
           },
           {
+            id: "ch1_p1_8",
             q: "성경을 비판하고 의심스러운 점을 포기하며 사단이 인도하는 대로 성서를 비판하는 일에 즐겨 따르는 자들의 영적 결말은 어떻게 됩니까?",
             options: [
               "마침내 가장 뛰어난 성경 주석을 쓰게 된다.",
@@ -650,9 +664,12 @@
               "하나님의 특별한 칭찬과 상급을 받는다."
             ],
             answer: 1,
+            shortAnswers: ["기롱하는 자", "기롱하는 자들", "기롱"],
+            displayAnswer: "기롱하는 자들이 됨",
             explanation: "해설 [18p]: '저들의 비판적인 기능은 활용함으로 예리하여지고 저들은 결국에 아무것도 확실히 믿는 것이 없게 된다... 따라서 저들은 기롱하는 자들이 되고'라고 묘사합니다."
           },
           {
+            id: "ch1_p1_9",
             q: "화잇 여사가 형제들에게 성경 그 자체의 정당성 여부에 대한 비판을 중단하고 말씀에 순종할 때 일어날 결과로 약속한 것은 무엇입니까?",
             options: [
               "모든 신학적 의문점이 즉시 학문적으로 풀린다.",
@@ -664,6 +681,7 @@
             explanation: "해설 [18p]: '성경 그 자체의 정당성 여부에 관한 그대들의 비판을 중단하고 말씀에 순종할 때에 단 한 사람도 잃어버린 바 되지 않을 것이다'라고 기록되어 있습니다."
           },
           {
+            id: "ch1_p1_10",
             q: "성경의 단순성과 명백한 표현에 대해 설명하면서, 구속의 경륜과 지도를 찾을 수 있는 대상으로 언급된 사람들은 누구입니까?",
             options: [
               "오직 대학 교육을 받은 지식인들과 신학자들",
@@ -675,6 +693,7 @@
             explanation: "해설 [18p]: '비단 완전히 성숙한 사람이나, 지적으로 비범한 사람뿐만 아니라 무학자, 농사꾼, 어린아이까지라도 이해할 수 있다'고 기록되어 있습니다."
           },
           {
+            id: "ch1_p1_11",
             q: "정직하지 못하고 진리를 깨닫거나 이해하려고 하지 않는 사람이 성경이나 증언의 글을 읽을 때 취하는 태도는 무엇입니까?",
             options: [
               "말씀의 단순한 참 뜻을 겸손히 순종한다.",
@@ -686,6 +705,7 @@
             explanation: "해설 [19p]: '모든 면에 자기 말을 자신의 목적에 적합하도록 왜곡되게 사용할 것이다. 그는 자기 말의 뜻을 잘못 해석할 것이며... 말의 참 뜻을 왜곡하며'라고 지적합니다."
           },
           {
+            id: "ch1_p1_12",
             q: "하나님께서 인간에게 성경을 주신 방식에 대하여 '성경에 대한 반대 이론들'(19p)에서 성경에 관해 설명한 문장은 무엇입니까?",
             options: [
               "단절되지 않은 계속적인 말씀의 고리를 잇는 형식으로 단번에 주셨다.",
@@ -697,6 +717,7 @@
             explanation: "해설 [19-20p]: '성경은 단절되지 않은 계속적인 말씀의 고리를 잇는 형식으로 인간에게 주신 것이 아니며... 적절한 기회를 발견하실 때마다 부분적으로 주신것이다'가 정확한 원문입니다."
           },
           {
+            id: "ch1_p1_13",
             q: "피상적인 견해를 가진 자와 달리, 진리와 의무에 일치하는 마음으로 인내와 사색과 기도로 성경을 깊이 탐구하는 자가 성경 전체에서 발견하게 되는 것은 무엇입니까?",
             options: [
               "서로 대립하는 모순된 역사적 인물들",
@@ -705,9 +726,12 @@
               "학자들 간의 무수한 논쟁거리"
             ],
             answer: 1,
+            shortAnswers: ["황금실", "굵은 황금실", "하나의 굵은 황금실", "영적 통일성"],
+            displayAnswer: "하나의 굵은 황금실 (영적 통일성)",
             explanation: "해설 [20p]: '빛을 받은 영혼은 영적 통일성을 발견할 것이며 성경 전체를 관통하는 하나의 굵은 황금실을 볼 수 있을 것이다'라는 명언이 수록되어 있습니다."
           },
           {
+            id: "ch1_p1_14",
             q: "성경을 읽을 때에 이해력을 어둡게 하고 정신을 혼란케 하는 강력한 인간적 요소 3가지(20p)는 무엇입니까?",
             options: [
               "원어 연구, 교리 비교, 역사의 파악",
@@ -716,9 +740,12 @@
               "지식의 탐구, 인내, 겸손"
             ],
             answer: 1,
+            shortAnswers: ["선입관", "선입관념", "편견", "선입 관념, 편견 및 감정"],
+            displayAnswer: "선입 관념, 편견 및 감정",
             explanation: "해설 [20p]: 원문에 '선입 관념, 편견 및 감정 등은 성경의 말씀을 읽을 때에 이해력을 어둡게 하고 정신을 혼란케 하는 강한 영향력을 가지고 있다'고 적혀 있습니다."
           },
           {
+            id: "ch1_p1_15",
             q: "★[원문 명언] 엘렌 화잇이 성경 저자들과 하나님과의 관계 및 영감의 대상을 설명하면서 밝힌 정확한 원문 표현은 무엇입니까?",
             options: [
               "성경의 저자들은 하나님의 기계적인 필촉(Pens)이었다.",
@@ -727,9 +754,12 @@
               "성경의 저자들은 영감을 받지 않은 단순한 대변인이었다."
             ],
             answer: 1,
+            shortAnswers: ["필자", "필자들", "하나님의 필자", "하나님의 필자들", "writers", "Writers"],
+            displayAnswer: "하나님의 필자들 (필촉이 아님)",
             explanation: "해설 [21p]: 원문에 '성경의 저자들은 하나님의 필자들이었으며 하나님의 필촉이 아니었다. 여러 다른 저자들을 관찰해 보라'고 명확하게 기록되어 있습니다."
           },
           {
+            id: "ch1_p1_16",
             q: "영감이 임하는 직접적인 작용 방식에 대하여 21페이지 원문이 설명하는 진리는 무엇입니까?",
             options: [
               "영감은 인간의 언어나 표현 방법에 직접 미치는 것이다.",
@@ -738,9 +768,12 @@
               "영감은 훗날 성경을 읽는 독자의 이성에만 제한적으로 작용한다."
             ],
             answer: 1,
+            shortAnswers: ["사람", "인간 자신", "저자", "사람들", "사람 자신"],
+            displayAnswer: "그 인간 자신 (사람들)",
             explanation: "해설 [21p]: '성경의 말씀 자체가 감동을 받은 것이 아니라 감동을 받은 것은 사람들이었다. 영감은 인간의 언어나 표현 방법에 미치는 것이 아니라 그 인간 자신에게 작용하는 것이며'가 정확한 원문 문장입니다."
           },
           {
+            id: "ch1_p1_17",
             q: "거룩한 성령의 감화가 인간 저자에게 작용할 때, 인간의 말들이 하나님의 말씀이 되는 과정은 어떻게 일어납니까?",
             options: [
               "인간의 의지와 정신이 완전히 마비되고 강제로 받아 적게 된다.",
@@ -749,9 +782,12 @@
               "천사가 들려주는 음성을 기계적으로 직역하여 완성된다."
             ],
             answer: 1,
+            shortAnswers: ["혼합", "혼합되어", "정신과 의지에 혼합"],
+            displayAnswer: "거룩한 정신과 의지가 인간의 정신과 의지에 혼합됨",
             explanation: "해설 [21p]: '거룩한 정신과 의지가 인간의 정신과 의지에 혼합하게 되어 인간의 말들이 하나님의 말씀으로 된 것이다'라고 서술되어 있습니다."
           },
           {
+            id: "ch1_p1_18",
             q: "하나님께서 마태, 마가, 누가, 요한 등 여러 저자들을 통해 동일한 복음 역사를 각자의 개성에 따라 기록하게 하신 목적은 무엇입니까?",
             options: [
               "틀에 박힌 일률성으로 단조롭게 들리지 않게 하고, 다양한 표현이 지식을 넓혀 각계각층 사람들의 필요성을 충족시키기 위하여",
@@ -763,6 +799,7 @@
             explanation: "해설 [21-22p]: '이러한 다양성이 지식을 광범위하게 하고 심화시킴으로써 여러 종류의 정신들, 곧 각계각층 사람들의 필요성을 충족시킬 수 있었다'고 밝힙니다."
           },
           {
+            id: "ch1_p1_19",
             q: "하나님께서 퇴폐한 감각과 세속적 식별력을 가진 인간들에게 불완전한 언어로 말씀하신 이유와 그 속에 나타난 하나님의 품성은 무엇입니까?",
             options: [
               "하늘 언어를 전달할 수 없어 단념하신 하나님의 한계",
@@ -771,9 +808,12 @@
               "구속의 경륜을 신비 속에 숨겨두려는 하나님의 엄격함"
             ],
             answer: 1,
+            shortAnswers: ["겸비", "겸비하심", "하나님의 겸비"],
+            displayAnswer: "하나님의 겸비하심",
             explanation: "해설 [22p]: '불완전한 언어로 인간에게 말씀하신다. 바로 여기에 하나님의 겸비하심이 나타난 것이다. 주님께서는 타락한 인류들이 현재 처하여 있는 위치에서 만나셨다'라고 기록되어 있습니다."
           },
           {
+            id: "ch1_p1_20",
             q: "배틀크릭 장막교회와 대학에서 유한한 인간들이 성경의 어떤 부분은 영감되고 다른 부분은 아니라는 위험한 입장을 가르쳤을 때, 주님께서 주신 평가(23p)는 무엇입니까?",
             options: [
               "지성인으로서 권장할 만한 진보적 연구이다.",
@@ -785,6 +825,7 @@
             explanation: "해설 [23p]: '나는 리뷰지에 실린 영감에 대한 기사가 주님의 감동으로 기록된 것이 아닌 것과 대학에 있는 우리 청년들에게 저들이 가르친 것을 주님께서 인정하지 않으신 것을 보았다'라고 경고합니다."
           },
           {
+            id: "ch1_p1_21",
             q: "1906년 폴슨 의사(Dr. Paulson)가 \"화잇 여사의 모든 서신은 마치 십계명처럼 영감으로 기록되었다\"고 개인적으로 결론지었을 때, 화잇 여사가 밝힌 답변은 무엇입니까?",
             options: [
               "자신의 모든 서신은 십계명과 똑같은 영감을 가졌다고 시인했다.",
@@ -796,6 +837,7 @@
             explanation: "해설 [24p]: '제 글 가운데서 저 자신이 그러한 주장을 한 것을 결코 찾아볼 수 없을 것이며 또한 과거에 우리 사업을 이끌어 나가신 선구자들도 그러한 주장을 한 적이 단 한번도 없었다는 것을 잘 아실 것입니다'라고 해명합니다."
           },
           {
+            id: "ch1_p1_22",
             q: "폴슨 의사에게 보낸 편지(25p)에서 설명한 십계명과 성경 기록 방식의 근본적인 차이점은 무엇입니까?",
             options: [
               "십계명은 인간의 언어 작문이고, 성경은 천사가 직접 기록한 글이다.",
@@ -804,9 +846,12 @@
               "십계명은 모세의 개인적 표현이고 성경은 무오한 하늘 문자이다."
             ],
             answer: 1,
+            shortAnswers: ["친수", "신성과 인성의 연합", "친수로 쓰심"],
+            displayAnswer: "십계명은 친수로 쓰셨고, 성경은 신성과 인성의 연합",
             explanation: "해설 [25p]: '십계명은 하나님께서 친히 말씀하셨고 당신의 손으로 친히 쓰셨다... 그러나 하나님께서 주신 진리들을 인간의 언어로 표현한 성경은 신성과 인성의 연합으로 이루어진 것이다'라고 명시되어 있습니다."
           },
           {
+            id: "ch1_p1_23",
             q: "화잇 여사가 성경이 신성과 인성의 연합으로 이루어졌음을 설명하면서 적용한 핵심 성경절(요 1:14)은 무엇입니까?",
             options: [
               "\"말씀이 육신이 되어 우리 가운데 거하시매\"",
@@ -815,9 +860,12 @@
               "\"내가 길이요 진리요 생명이니\""
             ],
             answer: 0,
+            shortAnswers: ["말씀이 육신이 되어", "말씀이육신이되어", "성육신", "말씀이 육신이 되어 우리 가운데 거하시매"],
+            displayAnswer: "말씀이 육신이 되어",
             explanation: "해설 [25p]: '“말씀이 육신이 되어 우리 가운데 거”(요 1:14)하셨다는 말씀은 그리스도께 뿐 아니라 성경에도 적용된다'라고 설명합니다."
           },
           {
+            id: "ch1_p1_24",
             q: "경고와 견책의 증언을 보낼 때, 교인들이 \"그 증언은 단순히 화잇 자매의 의견에 불과하다\"고 말하는 행위에 대해 화잇 여사는 어떻게 지적했습니까?",
             options: [
               "성도들의 자유로운 개인적 의사 표현이다.",
@@ -826,9 +874,12 @@
               "교회의 행정적 재판을 통해 바로잡아야 한다."
             ],
             answer: 1,
+            shortAnswers: ["하나님의 영을 모욕", "성령 모욕", "하나님의 영을 모욕하였다", "모욕"],
+            displayAnswer: "하나님의 영을 모욕함",
             explanation: "해설 [26p]: '증언은 단순히 화잇 자매의 의견에 불과하다는 말을 하고 있다. 이처럼 그대들은 하나님의 영을 모욕하였다'라고 엄중히 경고합니다."
           },
           {
+            id: "ch1_p1_25",
             q: "화잇 여사가 자신이 쓴 서신과 증언의 출처와 성격에 대하여 27페이지에서 선포한 공식 문장은 무엇입니까?",
             options: [
               "나는 교단의 발전을 위하여 내 개인적인 의견과 교훈을 썼다.",
@@ -840,6 +891,7 @@
             explanation: "해설 [27p]: '나는 지면에 단 한가지의 기사도 단순히 내 자신의 개인적 의견을 표현하기 위하여 글을 쓰지 않는다. 내가 쓴 서신과 증언들은 모두 하나님께서 계시를 통해 나에게 보여주신 것으로'가 정확한 원문입니다."
           },
           {
+            id: "ch1_p1_26",
             q: "28페이지에서 설명하는 '믿음(Faith)'의 참된 정의와 성격은 무엇입니까?",
             options: [
               "믿음은 극도의 감정적 흥분과 느낌에 근거한 것이다.",
@@ -848,9 +900,12 @@
               "믿음은 인간적인 타협과 협상을 통해 완성되는 것이다."
             ],
             answer: 1,
+            shortAnswers: ["증거", "증거 위에", "증거 위에 세워진 것"],
+            displayAnswer: "증거 위에 세워진 것 (실증에 근거한 것이 아님)",
             explanation: "해설 [28p]: 원문에 '믿음은 증거 위에 세워진 것이며 어떤 실증에 근거를 둔 것이 아니다'라고 명확히 정의되어 있습니다."
           },
           {
+            id: "ch1_p1_27",
             q: "★[원문 명언] \"당신은 선지자입니까?\"라는 질문에 대하여 화잇 여사가 답변한 명칭과, 자신을 선지자라 칭하지 않은 두 가지 이유는 무엇입니까?",
             options: [
               "교회 행정장관이라 칭함 — 교단의 법적 명칭이기 때문에",
@@ -859,9 +914,12 @@
               "성경 번역가라 칭함 — 오직 성경 원본을 번역하는 사명만 받았기 때문에"
             ],
             answer: 1,
+            shortAnswers: ["주님의 사자", "주님의사자", "주의 사자", "주의사자", "Messenger of the Lord"],
+            displayAnswer: "주님의 사자 (Messenger of the Lord)",
             explanation: "해설 [32p]: '나는 주님의 사자이다... 오늘날 너무나 많은 사람들이 자칭 선지자라고 담대하게 주장하고 있으며 이러한 자들은 주님의 사업에 수치 거리가 되고 있기 때문이며 나의 사업은 \"선지자\" 라는 말이 의미하는 것 이상의 광범위한 내용을 포함하고 있기 때문이다'가 정확한 원문 이유입니다."
           },
           {
+            id: "ch1_p1_28",
             q: "계시에서 본 광경을 글로 기록할 때, 화잇 여사가 사용하는 언어와 인용문(따옴표) 표시에 대한 원칙(37p)은 무엇입니까?",
             options: [
               "글을 쓸 때 사용하는 모든 단어를 천사가 불러준 대로 기록했다.",
@@ -870,9 +928,12 @@
               "계시 당시의 환상 문자를 그대로 사본으로 복사했다."
             ],
             answer: 1,
+            shortAnswers: ["천사", "천사의 말", "천사가 직접 나에게 말한 것"],
+            displayAnswer: "천사가 직접 말한 것만 따옴표를 함",
             explanation: "해설 [37p]: '내가 본 광경들을 묘사할 때에 사용하는 언어들은 내 자신의 것이며 천사가 직접 나에게 말한 것만은 언제나 인용문의 표시로 따옴표를 한다'가 정확한 원문입니다."
           },
           {
+            id: "ch1_p1_29",
             q: "★[원문 명언] 자신의 글과 관련하여 '무오설(Inerrancy)'에 대한 화잇 여사 본인의 명확한 공식 입장은 무엇이었습니까?",
             options: [
               "자신이 기록한 모든 증언과 서신은 절대로 오류가 없는 무오한 글이라고 주장했다.",
@@ -881,9 +942,12 @@
               "교회 총회의 검증을 마친 출판물에 대해서만 무오성을 인정했다."
             ],
             answer: 1,
+            shortAnswers: ["주장한 일이 없다", "결코 주장한 일이 없다", "주장하지 않음"],
+            displayAnswer: "결코 무오설을 주장한 일이 없음 (하나님만 오류가 없으심)",
             explanation: "해설 [37p]: 원문에 '무오설에 관하여 나는 결코 그것을 주장한 일이 없으며 오직 하나님께서만 절대로 오류가 없으시다'라고 명확히 선언하고 있습니다."
           },
           {
+            id: "ch1_p1_30",
             q: "파라다이스 밸리 위생병원의 병실 수(38개 vs 40개) 언급 사례에 대해 화잇 여사가 해명하며 경고한 '커다란 실수'(38-39p)는 무엇입니까?",
             options: [
               "병원 건물의 인허가 병실 수를 정확히 기억하지 못한 실수",
@@ -892,6 +956,8 @@
               "A형제의 서신에 즉시 답장을 쓰지 않은 실수"
             ],
             answer: 1,
+            shortAnswers: ["신령한 것과 일반적인 것을 혼동", "신령한 것과 일반적인 것", "혼동"],
+            displayAnswer: "신령한 것과 일반적인 것을 혼동하는 것",
             explanation: "해설 [38-39p]: '파라다이스 밸리 위생 병원의 병실 수에 관하여 소식을 전한 것은 주님께로부터 받은 계시로서가 아니라 단순히 인간적인 의견으로 말한 것뿐이었다... 사람이 신령한 것과 일반적인 것을 혼동한다는 것은 커다란 실수이다'라고 해명합니다."
           }
         ]
@@ -971,6 +1037,48 @@
       }
     }
 
+    function getSelectedQuizType() {
+      const selected = document.querySelector('input[name="quiz-type"]:checked');
+      return selected ? selected.value : 'multiple';
+    }
+
+    function renderChapterList() {
+      const listEl = document.getElementById('chapter-list');
+      listEl.innerHTML = '';
+      const currentType = getSelectedQuizType();
+      
+      Object.keys(quizData).forEach(key => {
+        const chapter = quizData[key];
+        let count = 0;
+        let countLabel = "";
+
+        if (currentType === 'short') {
+          // 단답 키워드가 정의된 문제만 카운트
+          count = chapter.questions.filter(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0).length;
+          countLabel = `단답 가능 ${count}문항`;
+        } else {
+          count = chapter.questions.length;
+          countLabel = `총 ${count}문항`;
+        }
+
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-chapter';
+        btn.innerHTML = `
+          <span>${chapter.title}</span>
+          <span class="count-tag">${countLabel}</span>
+        `;
+
+        if (count === 0 && currentType === 'short') {
+          btn.style.opacity = '0.5';
+          btn.onclick = () => alert("이 단원에는 단답형으로 지정된 문제가 없습니다. 객관식 모드를 이용해 주세요.");
+        } else {
+          btn.onclick = () => startQuiz(key);
+        }
+
+        listEl.appendChild(btn);
+      });
+    }
+
     function showChapterScreen() {
       clearInterval(timerInterval);
       topBannerGroup.classList.remove('hidden');
@@ -980,20 +1088,7 @@
       document.getElementById('review-container').classList.add('hidden');
       
       updateStoredWrongBtn();
-
-      const listEl = document.getElementById('chapter-list');
-      listEl.innerHTML = '';
-      
-      Object.keys(quizData).forEach(key => {
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-chapter';
-        btn.innerHTML = `
-          <span>${quizData[key].title}</span>
-          <span class="count-tag">${quizData[key].questions.length}문항</span>
-        `;
-        btn.onclick = () => startQuiz(key);
-        listEl.appendChild(btn);
-      });
+      renderChapterList();
     }
 
     function confirmExitToChapter() {
@@ -1003,11 +1098,6 @@
       }
     }
 
-    function getSelectedQuizType() {
-      const selected = document.querySelector('input[name="quiz-type"]:checked');
-      return selected ? selected.value : 'multiple';
-    }
-
     function startQuiz(chapterKey) {
       currentChapterKey = chapterKey;
       currentChapterTitle = quizData[chapterKey].title;
@@ -1015,7 +1105,13 @@
       isWrongMode = false;
       isStoredMode = false;
 
-      activeQuestions = shuffleArray(quizData[chapterKey].questions);
+      let qList = quizData[chapterKey].questions;
+      // 단답형 모드일 때는 shortAnswers가 있는 문제만 필터링
+      if (quizType === 'short') {
+        qList = qList.filter(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0);
+      }
+
+      activeQuestions = shuffleArray(qList);
       resetAndLoadQuiz();
     }
 
@@ -1039,7 +1135,17 @@
       const stored = getStoredWrongQuestions();
       if (stored.length === 0) return;
       quizType = getSelectedQuizType();
-      activeQuestions = shuffleArray(stored);
+
+      let qList = stored;
+      if (quizType === 'short') {
+        qList = qList.filter(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0);
+        if (qList.length === 0) {
+          alert("누적 오답 보관함에 단답형으로 풀 수 있는 문제가 없습니다.");
+          return;
+        }
+      }
+
+      activeQuestions = shuffleArray(qList);
       currentChapterTitle = "📑 누적 오답 보관함";
       isWrongMode = false;
       isStoredMode = true;
@@ -1059,7 +1165,6 @@
       document.getElementById('quiz-mode-badge').innerText = modeText;
       document.getElementById('review-container').classList.add('hidden');
       
-      // 퀴즈 화면에서는 상단 헤더 숨겨서 문제 영역 극대화
       topBannerGroup.classList.add('hidden');
       chapterScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
@@ -1169,7 +1274,7 @@
       if (selectedIdx === correctIdx) {
         buttons[selectedIdx].classList.add('correct');
         score++;
-        removeCorrectQuestionFromStorage(rawQ.id);
+        if (rawQ.id) removeCorrectQuestionFromStorage(rawQ.id);
       } else {
         buttons[selectedIdx].classList.add('incorrect');
         buttons[correctIdx].classList.add('correct');
@@ -1185,39 +1290,39 @@
     }
 
     function submitShortAnswer() {
-  const userInput = shortInput.value.trim();
-  if (!userInput) return;
+      const userInput = shortInput.value.trim();
+      if (!userInput) return;
 
-  clearInterval(timerInterval);
-  const rawQ = activeQuestions[currentQIndex];
-  shortInput.disabled = true;
-  document.getElementById('short-submit-btn').disabled = true;
+      clearInterval(timerInterval);
+      const rawQ = activeQuestions[currentQIndex];
+      shortInput.disabled = true;
+      document.getElementById('short-submit-btn').disabled = true;
 
-  const cleanInput = userInput.replace(/\s+/g, '').toLowerCase();
+      const cleanInput = userInput.replace(/\s+/g, '').toLowerCase();
 
-  // shortAnswers 배열이 누락되었을 경우 객관식 정답 텍스트를 기본 정답으로 안전하게 참조
-  const defaultAnswerText = (rawQ.options && rawQ.options[rawQ.answer]) ? rawQ.options[rawQ.answer] : "";
-  const validAnswers = (Array.isArray(rawQ.shortAnswers) && rawQ.shortAnswers.length > 0)
-    ? rawQ.shortAnswers
-    : [defaultAnswerText];
+      // 단답형 키워드 배열 또는 기본 정답 참조
+      const defaultAnswerText = (rawQ.options && rawQ.options[rawQ.answer]) ? rawQ.options[rawQ.answer] : "";
+      const validAnswers = (Array.isArray(rawQ.shortAnswers) && rawQ.shortAnswers.length > 0)
+        ? rawQ.shortAnswers
+        : [defaultAnswerText];
 
-  const isCorrect = validAnswers.some(ans => cleanInput === String(ans).replace(/\s+/g, '').toLowerCase());
-  const correctAnswerDisplay = rawQ.displayAnswer || defaultAnswerText;
+      const isCorrect = validAnswers.some(ans => cleanInput === String(ans).replace(/\s+/g, '').toLowerCase());
+      const correctAnswerDisplay = rawQ.displayAnswer || defaultAnswerText;
 
-  const expBox = document.getElementById('explanation-box');
-  if (isCorrect) {
-    score++;
-    if (rawQ.id) removeCorrectQuestionFromStorage(rawQ.id);
-    expBox.innerText = `🎉 정답입니다! (입력: ${userInput})\n\n${rawQ.explanation || ''}`;
-  } else {
-    roundWrongQuestions.push(rawQ);
-    saveWrongQuestionToStorage(rawQ);
-    expBox.innerText = `❌ 오답입니다! (입력: ${userInput})\n정답: ${correctAnswerDisplay}\n\n${rawQ.explanation || ''}`;
-  }
+      const expBox = document.getElementById('explanation-box');
+      if (isCorrect) {
+        score++;
+        if (rawQ.id) removeCorrectQuestionFromStorage(rawQ.id);
+        expBox.innerText = `🎉 정답입니다! (입력: ${userInput})\n\n${rawQ.explanation || ''}`;
+      } else {
+        roundWrongQuestions.push(rawQ);
+        saveWrongQuestionToStorage(rawQ);
+        expBox.innerText = `❌ 오답입니다! (입력: ${userInput})\n정답: ${correctAnswerDisplay}\n\n${rawQ.explanation || ''}`;
+      }
 
-  expBox.style.display = 'block';
-  document.getElementById('next-btn').classList.remove('hidden');
-}
+      expBox.style.display = 'block';
+      document.getElementById('next-btn').classList.remove('hidden');
+    }
 
     document.getElementById('next-btn').onclick = () => {
       currentQIndex++;

@@ -282,14 +282,24 @@
       transition: width 0.3s ease;
     }
     
-    /* 문제 지문 대형화 */
+    /* 문제 지문 대형화 및 빈칸 강조 */
     .question-title {
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       font-weight: 800;
       margin-bottom: 16px;
       word-break: keep-all;
-      line-height: 1.45;
+      line-height: 1.5;
       color: var(--text-main);
+    }
+    .blank-mark {
+      display: inline-block;
+      background: #fef08a;
+      color: #854d0e;
+      padding: 2px 10px;
+      border-radius: 6px;
+      border: 1.5px dashed #ca8a04;
+      font-weight: 900;
+      margin: 0 4px;
     }
 
     /* 보기 선택지 대형화 및 배지 분리 */
@@ -501,7 +511,7 @@
       <!-- 주관식 입력 영역 -->
       <div id="short-answer-container" class="hidden">
         <div class="short-input-box">
-          <input type="text" id="short-answer-input" class="short-input" placeholder="정답 키워드를 입력하세요" autocomplete="off">
+          <input type="text" id="short-answer-input" class="short-input" placeholder="빈칸에 들어갈 키워드를 입력하세요" autocomplete="off">
           <button id="short-submit-btn" class="btn btn-primary short-submit-btn" onclick="submitShortAnswer()">제출</button>
         </div>
       </div>
@@ -567,6 +577,7 @@
           {
             id: "ch1_p1_1",
             q: "가려뽑은기별 1권 제1장 서두(15p)에서 화잇 여사는 성경을 해석함에 있어서 회의주의와 불신 사상이 나타나는 시대를 경고하며 예수님의 어떤 말씀(눅 18:8)을 인용합니까?",
+            shortQ: "화잇 여사는 15p 서두에서 눅 18:8을 인용하며 '인자가 올 때에 세상에서 <span class=\"blank-mark\">이것</span>을 보겠느냐'라고 물었습니다. 빈칸은 무엇입니까?",
             options: [
               "인자가 올 때에 세상에서 믿음을 보겠느냐",
               "너희는 세상의 소금이니 소금이 만일 그 맛을 잃으면 무엇으로 짜게 하리요",
@@ -574,8 +585,8 @@
               "수고하고 무거운 짐진 자들아 다 내게로 오라"
             ],
             answer: 0,
-            shortAnswers: ["믿음을 보겠느냐", "세상에서 믿음을 보겠느냐", "인자가 올 때에 세상에서 믿음을 보겠느냐"],
-            displayAnswer: "인자가 올 때에 세상에서 믿음을 보겠느냐",
+            shortAnswers: ["믿음", "믿음을 보겠느냐", "세상에서 믿음을 보겠느냐"],
+            displayAnswer: "믿음 (믿음을 보겠느냐)",
             explanation: "해설 [15p]: 15페이지 첫 문장에서 '지금 이 때야말로 \"인자가 올 때에 세상에서 믿음을 보겠느냐\"(눅 18:8)고 물어보아야 할 가장 적절한 때이다'라고 시작합니다."
           },
           {
@@ -617,6 +628,7 @@
           {
             id: "ch1_p1_5",
             q: "유한한 인간이 자신의 한정된 표준으로 성경의 어느 부분은 영감되었고 어느 부분은 아니라고 측정하려는 태도에 대하여 선지자는 어떤 모습을 취해야 한다고 권고합니까?",
+            shortQ: "인간이 성경 영감 여부를 감히 측정하려 할 때, 마치 엘리야처럼 하나님 목전에서 <span class=\"blank-mark\">이곳</span>을 가리워야 한다고 경고했습니다. 어디입니까?",
             options: [
               "학문적 우월성을 마음껏 자랑해야 한다.",
               "엘리야가 세미한 소리를 들었을 때처럼 하나님과 거룩한 천사들 목전에서 얼굴을 가리워야 한다.",
@@ -624,8 +636,8 @@
               "새로운 번역본을 만들어 스스로 정당성을 입증해야 한다."
             ],
             answer: 1,
-            shortAnswers: ["얼굴을 가리워야 한다", "얼굴을 가리움", "얼굴"],
-            displayAnswer: "얼굴을 가리워야 함 (엘리야처럼)",
+            shortAnswers: ["얼굴", "얼굴을 가리워야 한다", "얼굴을 가리움"],
+            displayAnswer: "얼굴 (얼굴을 가리워야 함)",
             explanation: "해설 [17p]: '마치 엘리야가 세미한 소리를 들었을 때처럼 하나님과 거룩한 천사들의 목전에서 얼굴을 가리워야 할 것이다(왕상 19:12)'라고 지적합니다."
           },
           {
@@ -643,6 +655,7 @@
           {
             id: "ch1_p1_7",
             q: "성경 전체의 영감성에 대하여 엘렌 화잇 본인이 1888년 미네아폴리스에서 선포한 공식적인 신앙 고백은 무엇입니까?",
+            shortQ: "화잇 여사는 1888년에 '나는 성경을 영감으로 기록된 말씀으로 받아들이며 성경 <span class=\"blank-mark\">이것</span>이 영감된 말씀임을 믿는다'고 했습니다. 빈칸은?",
             options: [
               "나는 성경의 교리적인 부분만 영감된 말씀으로 받아들인다.",
               "나는 성경을 영감으로 기록된 말씀으로서 그대로 받아들인다. 또한 나는 성경 전체가 영감으로 된 말씀임을 믿는다.",
@@ -650,13 +663,14 @@
               "나는 영감 여부를 인간의 이성으로 가려낸 후에 받아들인다."
             ],
             answer: 1,
-            shortAnswers: ["성경 전체", "성경전체"],
-            displayAnswer: "성경 전체가 영감으로 된 말씀임을 믿음",
+            shortAnswers: ["전체", "성경 전체", "성경전체"],
+            displayAnswer: "전체 (성경 전체)",
             explanation: "해설 [17p]: '나는 성경을 영감으로 기록된 말씀으로서 그대로 받아들인다. 또한 나는 성경 전체가 영감으로 된 말씀임을 믿는다'라는 문장이 정확한 원문 표현입니다."
           },
           {
             id: "ch1_p1_8",
             q: "성경을 비판하고 의심스러운 점을 포기하며 사단이 인도하는 대로 성서를 비판하는 일에 즐겨 따르는 자들의 영적 결말은 어떻게 됩니까?",
+            shortQ: "성경을 즐겨 비판하는 자들은 예리해진 비판 기능 때문에 결국 아무것도 확실히 믿지 못하는 <span class=\"blank-mark\">이런 자들</span>이 되고 맙니다. 누구입니까?",
             options: [
               "마침내 가장 뛰어난 성경 주석을 쓰게 된다.",
               "비판적인 기능이 예리해져 결국 아무것도 확실히 믿는 것이 없게 되고 기롱하는 자들이 된다.",
@@ -665,7 +679,7 @@
             ],
             answer: 1,
             shortAnswers: ["기롱하는 자", "기롱하는 자들", "기롱"],
-            displayAnswer: "기롱하는 자들이 됨",
+            displayAnswer: "기롱하는 자들",
             explanation: "해설 [18p]: '저들의 비판적인 기능은 활용함으로 예리하여지고 저들은 결국에 아무것도 확실히 믿는 것이 없게 된다... 따라서 저들은 기롱하는 자들이 되고'라고 묘사합니다."
           },
           {
@@ -719,6 +733,7 @@
           {
             id: "ch1_p1_13",
             q: "피상적인 견해를 가진 자와 달리, 진리와 의무에 일치하는 마음으로 인내와 사색과 기도로 성경을 깊이 탐구하는 자가 성경 전체에서 발견하게 되는 것은 무엇입니까?",
+            shortQ: "기도로 성경을 깊이 탐구하는 자는 영적 통일성을 발견하며, 성경 전체를 관통하는 하나의 굵은 <span class=\"blank-mark\">이것</span>을 보게 됩니다. 무엇입니까?",
             options: [
               "서로 대립하는 모순된 역사적 인물들",
               "영적 통일성을 발견할 것이며 성경 전체를 관통하는 하나의 굵은 황금실을 볼 수 있을 것이다.",
@@ -726,8 +741,8 @@
               "학자들 간의 무수한 논쟁거리"
             ],
             answer: 1,
-            shortAnswers: ["황금실", "굵은 황금실", "하나의 굵은 황금실", "영적 통일성"],
-            displayAnswer: "하나의 굵은 황금실 (영적 통일성)",
+            shortAnswers: ["황금실", "굵은 황금실", "하나의 굵은 황금실"],
+            displayAnswer: "황금실 (하나의 굵은 황금실)",
             explanation: "해설 [20p]: '빛을 받은 영혼은 영적 통일성을 발견할 것이며 성경 전체를 관통하는 하나의 굵은 황금실을 볼 수 있을 것이다'라는 명언이 수록되어 있습니다."
           },
           {
@@ -740,13 +755,12 @@
               "지식의 탐구, 인내, 겸손"
             ],
             answer: 1,
-            shortAnswers: ["선입관", "선입관념", "편견", "선입 관념, 편견 및 감정"],
-            displayAnswer: "선입 관념, 편견 및 감정",
             explanation: "해설 [20p]: 원문에 '선입 관념, 편견 및 감정 등은 성경의 말씀을 읽을 때에 이해력을 어둡게 하고 정신을 혼란케 하는 강한 영향력을 가지고 있다'고 적혀 있습니다."
           },
           {
             id: "ch1_p1_15",
             q: "★[원문 명언] 엘렌 화잇이 성경 저자들과 하나님과의 관계 및 영감의 대상을 설명하면서 밝힌 정확한 원문 표현은 무엇입니까?",
+            shortQ: "화잇 여사는 '성경의 저자들은 하나님의 <span class=\"blank-mark\">이것들</span>이었으며 하나님의 필촉(Pens)이 아니었다'고 했습니다. 빈칸은 무엇입니까?",
             options: [
               "성경의 저자들은 하나님의 기계적인 필촉(Pens)이었다.",
               "성경의 저자들은 하나님의 필자들이었으며 하나님의 필촉이 아니었다.",
@@ -755,12 +769,13 @@
             ],
             answer: 1,
             shortAnswers: ["필자", "필자들", "하나님의 필자", "하나님의 필자들", "writers", "Writers"],
-            displayAnswer: "하나님의 필자들 (필촉이 아님)",
+            displayAnswer: "필자들 (하나님의 필자들)",
             explanation: "해설 [21p]: 원문에 '성경의 저자들은 하나님의 필자들이었으며 하나님의 필촉이 아니었다. 여러 다른 저자들을 관찰해 보라'고 명확하게 기록되어 있습니다."
           },
           {
             id: "ch1_p1_16",
             q: "영감이 임하는 직접적인 작용 방식에 대하여 21페이지 원문이 설명하는 진리는 무엇입니까?",
+            shortQ: "화잇 여사는 영감이 인간의 언어나 표현 방법에 미치는 것이 아니라 그 <span class=\"blank-mark\">이것</span> 자신에게 작용하는 것이라고 밝혔습니다. 빈칸은?",
             options: [
               "영감은 인간의 언어나 표현 방법에 직접 미치는 것이다.",
               "성경의 말씀 자체가 감동을 받은 것이 아니라 감동을 받은 것은 사람들이었다. 영감은 언어나 표현 방법에 미치는 것이 아니라 그 인간 자신에게 작용하는 것이다.",
@@ -768,13 +783,14 @@
               "영감은 훗날 성경을 읽는 독자의 이성에만 제한적으로 작용한다."
             ],
             answer: 1,
-            shortAnswers: ["사람", "인간 자신", "저자", "사람들", "사람 자신"],
-            displayAnswer: "그 인간 자신 (사람들)",
+            shortAnswers: ["인간", "사람", "인간 자신", "저자", "사람들"],
+            displayAnswer: "인간 자신 (사람)",
             explanation: "해설 [21p]: '성경의 말씀 자체가 감동을 받은 것이 아니라 감동을 받은 것은 사람들이었다. 영감은 인간의 언어나 표현 방법에 미치는 것이 아니라 그 인간 자신에게 작용하는 것이며'가 정확한 원문 문장입니다."
           },
           {
             id: "ch1_p1_17",
             q: "거룩한 성령의 감화가 인간 저자에게 작용할 때, 인간의 말들이 하나님의 말씀이 되는 과정은 어떻게 일어납니까?",
+            shortQ: "인간의 말이 하나님의 말씀이 되는 과정은 '거룩한 정신과 의지가 인간의 정신과 의지에 <span class=\"blank-mark\">이것</span>하게 됨'으로 일어납니다. 이것은?",
             options: [
               "인간의 의지와 정신이 완전히 마비되고 강제로 받아 적게 된다.",
               "거룩한 정신과 의지가 인간의 정신과 의지에 혼합하게 되어 인간의 말들이 하나님의 말씀으로 된 것이다.",
@@ -782,8 +798,8 @@
               "천사가 들려주는 음성을 기계적으로 직역하여 완성된다."
             ],
             answer: 1,
-            shortAnswers: ["혼합", "혼합되어", "정신과 의지에 혼합"],
-            displayAnswer: "거룩한 정신과 의지가 인간의 정신과 의지에 혼합됨",
+            shortAnswers: ["혼합", "혼합하게 됨", "혼합됨", "결합"],
+            displayAnswer: "혼합 (거룩한 의지와 인간 의지의 혼합)",
             explanation: "해설 [21p]: '거룩한 정신과 의지가 인간의 정신과 의지에 혼합하게 되어 인간의 말들이 하나님의 말씀으로 된 것이다'라고 서술되어 있습니다."
           },
           {
@@ -801,6 +817,7 @@
           {
             id: "ch1_p1_19",
             q: "하나님께서 퇴폐한 감각과 세속적 식별력을 가진 인간들에게 불완전한 언어로 말씀하신 이유와 그 속에 나타난 하나님의 품성은 무엇입니까?",
+            shortQ: "하나님께서 타락한 인류를 그들의 처지에서 만나고자 불완전한 인간의 언어로 말씀하신 데서 나타난 하나님의 품성은 <span class=\"blank-mark\">이것</span>하심입니다. 무엇입니까?",
             options: [
               "하늘 언어를 전달할 수 없어 단념하신 하나님의 한계",
               "타락한 인류를 현재 위치에서 만나기 위해 불완전한 언어로 말씀하신 하나님의 겸비하심",
@@ -809,7 +826,7 @@
             ],
             answer: 1,
             shortAnswers: ["겸비", "겸비하심", "하나님의 겸비"],
-            displayAnswer: "하나님의 겸비하심",
+            displayAnswer: "겸비하심",
             explanation: "해설 [22p]: '불완전한 언어로 인간에게 말씀하신다. 바로 여기에 하나님의 겸비하심이 나타난 것이다. 주님께서는 타락한 인류들이 현재 처하여 있는 위치에서 만나셨다'라고 기록되어 있습니다."
           },
           {
@@ -846,13 +863,12 @@
               "십계명은 모세의 개인적 표현이고 성경은 무오한 하늘 문자이다."
             ],
             answer: 1,
-            shortAnswers: ["친수", "신성과 인성의 연합", "친수로 쓰심"],
-            displayAnswer: "십계명은 친수로 쓰셨고, 성경은 신성과 인성의 연합",
             explanation: "해설 [25p]: '십계명은 하나님께서 친히 말씀하셨고 당신의 손으로 친히 쓰셨다... 그러나 하나님께서 주신 진리들을 인간의 언어로 표현한 성경은 신성과 인성의 연합으로 이루어진 것이다'라고 명시되어 있습니다."
           },
           {
             id: "ch1_p1_23",
             q: "화잇 여사가 성경이 신성과 인성의 연합으로 이루어졌음을 설명하면서 적용한 핵심 성경절(요 1:14)은 무엇입니까?",
+            shortQ: "화잇 여사는 성경이 신성과 인성의 연합임을 요 1:14의 '<span class=\"blank-mark\">이것</span>이 육신이 되어 우리 가운데 거하시매' 구절을 적용했습니다. 빈칸은?",
             options: [
               "\"말씀이 육신이 되어 우리 가운데 거하시매\"",
               "\"태초에 하나님이 천지를 창조하시니라\"",
@@ -860,13 +876,14 @@
               "\"내가 길이요 진리요 생명이니\""
             ],
             answer: 0,
-            shortAnswers: ["말씀이 육신이 되어", "말씀이육신이되어", "성육신", "말씀이 육신이 되어 우리 가운데 거하시매"],
-            displayAnswer: "말씀이 육신이 되어",
+            shortAnswers: ["말씀", "말씀이", "말씀이 육신이 되어"],
+            displayAnswer: "말씀 (말씀이 육신이 되어)",
             explanation: "해설 [25p]: '“말씀이 육신이 되어 우리 가운데 거”(요 1:14)하셨다는 말씀은 그리스도께 뿐 아니라 성경에도 적용된다'라고 설명합니다."
           },
           {
             id: "ch1_p1_24",
             q: "경고와 견책의 증언을 보낼 때, 교인들이 \"그 증언은 단순히 화잇 자매의 의견에 불과하다\"고 말하는 행위에 대해 화잇 여사는 어떻게 지적했습니까?",
+            shortQ: "경고의 증언을 두고 '단순히 화잇 자매의 의견일 뿐이다'라고 말하는 행위는 하나님의 <span class=\"blank-mark\">이것</span>을 모욕하는 일이라고 엄중히 경고했습니다. 빈칸은?",
             options: [
               "성도들의 자유로운 개인적 의사 표현이다.",
               "이처럼 그대들은 하나님의 영을 모욕하였다.",
@@ -874,8 +891,8 @@
               "교회의 행정적 재판을 통해 바로잡아야 한다."
             ],
             answer: 1,
-            shortAnswers: ["하나님의 영을 모욕", "성령 모욕", "하나님의 영을 모욕하였다", "모욕"],
-            displayAnswer: "하나님의 영을 모욕함",
+            shortAnswers: ["영", "하나님의 영", "성령"],
+            displayAnswer: "하나님의 영 (성령)",
             explanation: "해설 [26p]: '증언은 단순히 화잇 자매의 의견에 불과하다는 말을 하고 있다. 이처럼 그대들은 하나님의 영을 모욕하였다'라고 엄중히 경고합니다."
           },
           {
@@ -893,6 +910,7 @@
           {
             id: "ch1_p1_26",
             q: "28페이지에서 설명하는 '믿음(Faith)'의 참된 정의와 성격은 무엇입니까?",
+            shortQ: "화잇 여사는 28p에서 '믿음은 <span class=\"blank-mark\">이것</span> 위에 세워진 것이며 어떤 실증에 근거를 둔 것이 아니다'라고 정의했습니다. 빈칸은 무엇입니까?",
             options: [
               "믿음은 극도의 감정적 흥분과 느낌에 근거한 것이다.",
               "믿음은 증거 위에 세워진 것이며 어떤 실증에 근거를 둔 것이 아니다.",
@@ -901,12 +919,13 @@
             ],
             answer: 1,
             shortAnswers: ["증거", "증거 위에", "증거 위에 세워진 것"],
-            displayAnswer: "증거 위에 세워진 것 (실증에 근거한 것이 아님)",
+            displayAnswer: "증거",
             explanation: "해설 [28p]: 원문에 '믿음은 증거 위에 세워진 것이며 어떤 실증에 근거를 둔 것이 아니다'라고 명확히 정의되어 있습니다."
           },
           {
             id: "ch1_p1_27",
             q: "★[원문 명언] \"당신은 선지자입니까?\"라는 질문에 대하여 화잇 여사가 답변한 명칭과, 자신을 선지자라 칭하지 않은 두 가지 이유는 무엇입니까?",
+            shortQ: "화잇 여사는 자신을 선지자 대신 '주님의 <span class=\"blank-mark\">이것</span>'이라 칭하며, 선지자라는 말보다 더 광범위한 사명을 포함한다고 밝혔습니다. 빈칸은?",
             options: [
               "교회 행정장관이라 칭함 — 교단의 법적 명칭이기 때문에",
               "주님의 사자(Messenger)라 칭함 — 자칭 선지자들이 수치가 되고 있었고, 맡은 사업이 선지자라는 말이 의미하는 것 이상의 광범위한 내용을 포함하기 때문에",
@@ -914,13 +933,14 @@
               "성경 번역가라 칭함 — 오직 성경 원본을 번역하는 사명만 받았기 때문에"
             ],
             answer: 1,
-            shortAnswers: ["주님의 사자", "주님의사자", "주의 사자", "주의사자", "Messenger of the Lord"],
-            displayAnswer: "주님의 사자 (Messenger of the Lord)",
+            shortAnswers: ["사자", "주님의 사자", "주의 사자", "Messenger"],
+            displayAnswer: "사자 (주님의 사자)",
             explanation: "해설 [32p]: '나는 주님의 사자이다... 오늘날 너무나 많은 사람들이 자칭 선지자라고 담대하게 주장하고 있으며 이러한 자들은 주님의 사업에 수치 거리가 되고 있기 때문이며 나의 사업은 \"선지자\" 라는 말이 의미하는 것 이상의 광범위한 내용을 포함하고 있기 때문이다'가 정확한 원문 이유입니다."
           },
           {
             id: "ch1_p1_28",
             q: "계시에서 본 광경을 글로 기록할 때, 화잇 여사가 사용하는 언어와 인용문(따옴표) 표시에 대한 원칙(37p)은 무엇입니까?",
+            shortQ: "화잇 여사는 본 광경을 묘사할 때 자신의 언어를 쓰지만, 유일하게 <span class=\"blank-mark\">이 존재</span>가 직접 말한 것만 따옴표를 한다고 밝혔습니다. 누구입니까?",
             options: [
               "글을 쓸 때 사용하는 모든 단어를 천사가 불러준 대로 기록했다.",
               "내가 본 광경들을 묘사할 때에 사용하는 언어들은 내 자신의 것이며 천사가 직접 나에게 말한 것만은 언제나 인용문의 표시로 따옴표를 한다.",
@@ -928,13 +948,14 @@
               "계시 당시의 환상 문자를 그대로 사본으로 복사했다."
             ],
             answer: 1,
-            shortAnswers: ["천사", "천사의 말", "천사가 직접 나에게 말한 것"],
-            displayAnswer: "천사가 직접 말한 것만 따옴표를 함",
+            shortAnswers: ["천사", "천사의 말"],
+            displayAnswer: "천사",
             explanation: "해설 [37p]: '내가 본 광경들을 묘사할 때에 사용하는 언어들은 내 자신의 것이며 천사가 직접 나에게 말한 것만은 언제나 인용문의 표시로 따옴표를 한다'가 정확한 원문입니다."
           },
           {
             id: "ch1_p1_29",
             q: "★[원문 명언] 자신의 글과 관련하여 '무오설(Inerrancy)'에 대한 화잇 여사 본인의 명확한 공식 입장은 무엇이었습니까?",
+            shortQ: "화잇 여사는 무오설에 관하여 '결코 그것을 주장한 일이 없으며 오직 <span class=\"blank-mark\">이분</span>께서만 절대로 오류가 없으시다'고 선언했습니다. 누구입니까?",
             options: [
               "자신이 기록한 모든 증언과 서신은 절대로 오류가 없는 무오한 글이라고 주장했다.",
               "무오설에 관하여 나는 결코 그것을 주장한 일이 없으며 오직 하나님께서만 절대로 오류가 없으시다.",
@@ -942,13 +963,14 @@
               "교회 총회의 검증을 마친 출판물에 대해서만 무오성을 인정했다."
             ],
             answer: 1,
-            shortAnswers: ["주장한 일이 없다", "결코 주장한 일이 없다", "주장하지 않음"],
-            displayAnswer: "결코 무오설을 주장한 일이 없음 (하나님만 오류가 없으심)",
+            shortAnswers: ["하나님", "하나님만", "주님"],
+            displayAnswer: "하나님",
             explanation: "해설 [37p]: 원문에 '무오설에 관하여 나는 결코 그것을 주장한 일이 없으며 오직 하나님께서만 절대로 오류가 없으시다'라고 명확히 선언하고 있습니다."
           },
           {
             id: "ch1_p1_30",
             q: "파라다이스 밸리 위생병원의 병실 수(38개 vs 40개) 언급 사례에 대해 화잇 여사가 해명하며 경고한 '커다란 실수'(38-39p)는 무엇입니까?",
+            shortQ: "화잇 여사는 병실 수 언급 사례를 설명하면서, 사람이 '신령한 것'과 <span class=\"blank-mark\">이것</span>인 것을 혼동하는 것은 커다란 실수라고 경고했습니다. 빈칸은?",
             options: [
               "병원 건물의 인허가 병실 수를 정확히 기억하지 못한 실수",
               "병실 수는 계시가 아니라 알 만한 사람에게 물어서 안 인간적인 소식/의견이었으며, 사람이 신령한 것과 일반적인 것을 혼동하는 것은 커다란 실수이다.",
@@ -956,15 +978,15 @@
               "A형제의 서신에 즉시 답장을 쓰지 않은 실수"
             ],
             answer: 1,
-            shortAnswers: ["신령한 것과 일반적인 것을 혼동", "신령한 것과 일반적인 것", "혼동"],
-            displayAnswer: "신령한 것과 일반적인 것을 혼동하는 것",
+            shortAnswers: ["일반적인 것", "일반적", "일반적인"],
+            displayAnswer: "일반적인 것",
             explanation: "해설 [38-39p]: '파라다이스 밸리 위생 병원의 병실 수에 관하여 소식을 전한 것은 주님께로부터 받은 계시로서가 아니라 단순히 인간적인 의견으로 말한 것뿐이었다... 사람이 신령한 것과 일반적인 것을 혼동한다는 것은 커다란 실수이다'라고 해명합니다."
           }
         ]
       }
     };
 
-    const STORAGE_KEY = "goldenbell_wrong_questions_v3";
+    const STORAGE_KEY = "goldenbell_wrong_questions_v4";
 
     function getStoredWrongQuestions() {
       try {
@@ -1053,7 +1075,6 @@
         let countLabel = "";
 
         if (currentType === 'short') {
-          // 단답 키워드가 정의된 문제만 카운트
           count = chapter.questions.filter(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0).length;
           countLabel = `단답 가능 ${count}문항`;
         } else {
@@ -1106,7 +1127,6 @@
       isStoredMode = false;
 
       let qList = quizData[chapterKey].questions;
-      // 단답형 모드일 때는 shortAnswers가 있는 문제만 필터링
       if (quizType === 'short') {
         qList = qList.filter(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0);
       }
@@ -1158,7 +1178,7 @@
       score = 0;
       roundWrongQuestions = [];
       
-      let modeText = quizType === 'short' ? "단답형" : "객관식 셔플";
+      let modeText = quizType === 'short' ? "단답형 빈칸 채우기" : "객관식 셔플";
       if (isWrongMode) modeText += " · 오답";
       if (isStoredMode) modeText += " · 누적 오답";
       
@@ -1180,7 +1200,14 @@
       
       document.getElementById('progress-fill').style.width = `${((currentQIndex) / totalQ) * 100}%`;
       document.getElementById('question-number').innerText = `${currentChapterTitle} — 문제 ${currentQIndex + 1} / ${totalQ}`;
-      document.getElementById('question-text').innerText = rawQ.q;
+      
+      // 단답형 모드일 때 빈칸형 지문(shortQ)이 있으면 우선 사용
+      const qTextEl = document.getElementById('question-text');
+      if (quizType === 'short' && rawQ.shortQ) {
+        qTextEl.innerHTML = rawQ.shortQ;
+      } else {
+        qTextEl.innerHTML = rawQ.q;
+      }
       
       const optionsContainer = document.getElementById('options-container');
       const shortContainer = document.getElementById('short-answer-container');
@@ -1300,7 +1327,6 @@
 
       const cleanInput = userInput.replace(/\s+/g, '').toLowerCase();
 
-      // 단답형 키워드 배열 또는 기본 정답 참조
       const defaultAnswerText = (rawQ.options && rawQ.options[rawQ.answer]) ? rawQ.options[rawQ.answer] : "";
       const validAnswers = (Array.isArray(rawQ.shortAnswers) && rawQ.shortAnswers.length > 0)
         ? rawQ.shortAnswers
@@ -1374,7 +1400,7 @@
         const div = document.createElement('div');
         div.className = 'review-item';
         div.innerHTML = `
-          <div class="review-q">${idx + 1}. ${item.q}</div>
+          <div class="review-q">${idx + 1}. ${item.shortQ ? item.shortQ : item.q}</div>
           <div class="review-ans">정답: ${item.displayAnswer || item.options[item.answer]}</div>
           <div class="review-exp">${item.explanation}</div>
         `;

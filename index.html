@@ -10,14 +10,13 @@
       --primary-light: #2563eb;
       --primary-hover: #1d4ed8;
       --gold-accent: #f59e0b;
-      --gold-light: #fef3c7;
       --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
       --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --correct-color: #16a34a;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --correct-color: #15803d;
       --correct-bg: #dcfce7;
-      --incorrect-color: #dc2626;
+      --incorrect-color: #b91c1c;
       --incorrect-bg: #fee2e2;
       --timer-color: #ea580c;
     }
@@ -26,8 +25,8 @@
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg-gradient);
       color: var(--text-main);
-      line-height: 1.6;
-      padding: 24px 14px;
+      line-height: 1.5;
+      padding: 6px;
       display: flex;
       justify-content: center;
       min-height: 100vh;
@@ -36,9 +35,9 @@
       width: 100%;
       max-width: 620px;
       background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08);
-      padding: 26px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(30, 58, 138, 0.08);
+      padding: 14px 12px;
       position: relative;
     }
     
@@ -46,39 +45,39 @@
     .dday-banner {
       background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
       color: #ffffff;
-      border-radius: 14px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     }
     .dday-title {
       font-size: 0.88rem;
-      font-weight: 500;
+      font-weight: 600;
       color: #e0e7ff;
     }
     .dday-sub {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: #bfdbfe;
       margin-top: 2px;
     }
     .dday-badge {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #fef08a;
       background: rgba(255, 255, 255, 0.15);
-      padding: 4px 14px;
-      border-radius: 10px;
+      padding: 4px 12px;
+      border-radius: 8px;
       letter-spacing: -0.5px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       border-bottom: 1.5px solid #f1f5f9;
-      padding-bottom: 16px;
+      padding-bottom: 12px;
     }
     h1 { 
       font-size: 1.35rem; 
@@ -86,19 +85,19 @@
       word-break: keep-all; 
       font-weight: 800;
     }
-    p.subtitle { font-size: 0.84rem; color: var(--text-muted); margin-top: 4px; }
+    p.subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
     
     /* 설정 박스 */
     .settings-panel {
       background: #f8fafc;
       border: 1.5px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 18px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      font-size: 0.88rem;
+      gap: 10px;
+      font-size: 0.92rem;
     }
     .setting-row {
       display: flex;
@@ -110,7 +109,7 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
     }
     .toggle-switch input {
       cursor: pointer;
@@ -127,8 +126,8 @@
       align-items: center;
       gap: 5px;
       cursor: pointer;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.92rem;
+      font-weight: 700;
       color: var(--text-main);
     }
     .mode-radio-label input {
@@ -140,18 +139,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
     .nav-btn {
       background: #eef2ff;
       border: 1px solid #c7d2fe;
       color: var(--primary-color);
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       padding: 6px 14px;
       border-radius: 20px;
       transition: all 0.2s ease;
@@ -160,14 +159,13 @@
       background: var(--primary-color);
       border-color: var(--primary-color);
       color: #ffffff;
-      box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
     }
     .badge-mode {
       background: #f1f5f9;
-      color: #475569;
+      color: var(--text-muted);
       padding: 4px 10px;
       border-radius: 8px;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 700;
     }
 
@@ -176,19 +174,19 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.84rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--timer-color);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       background: #fff7ed;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 8px;
     }
     .timer-bar-bg {
       flex: 1;
-      height: 6px;
+      height: 7px;
       background: #fed7aa;
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
     }
     .timer-bar-fill {
@@ -202,12 +200,12 @@
     .btn {
       display: block;
       width: 100%;
-      padding: 13px 16px;
+      padding: 14px 14px;
       margin: 8px 0;
       background: #ffffff;
-      border: 1.5px solid #e2e8f0;
+      border: 1.5px solid #d8e2ec;
       border-radius: 12px;
-      font-size: 0.94rem;
+      font-size: 1.05rem;
       text-align: left;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -216,47 +214,47 @@
     .btn:hover {
       border-color: var(--primary-light);
       background-color: #f8fafc;
-      transform: translateY(-1px);
     }
     .btn-chapter {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 16px;
-      border: 1.5px solid #e2e8f0;
+      padding: 14px 14px;
+      border: 1.5px solid #cbd5e1;
       background: #ffffff;
-      margin-bottom: 10px;
-    }
-    .btn-chapter:hover {
-      border-color: var(--primary-light);
-      background: #f8fafc;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
     }
     .btn-chapter .count-tag {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       background: #eef2ff;
       color: var(--primary-light);
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 6px;
+      flex-shrink: 0;
+      margin-left: 8px;
     }
     .btn-primary {
       background: var(--primary-color);
       color: white;
       text-align: center;
       border: none;
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 14px;
     }
     .btn-primary:hover {
       background: var(--primary-hover);
-      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
     }
     .btn-secondary {
       background: #f8fafc;
       color: #334155;
       text-align: center;
       border: 1.5px solid #cbd5e1;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1rem;
     }
     .btn-secondary:hover {
       background: #e2e8f0;
@@ -267,17 +265,15 @@
       text-align: center;
       border: 1.5px solid #fecaca;
       font-weight: 700;
-    }
-    .btn-danger:hover {
-      background: #fee2e2;
+      font-size: 1rem;
     }
     
     .progress-bar {
-      height: 8px;
+      height: 7px;
       background: #edf2f7;
       border-radius: 4px;
       overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
     .progress-fill {
       height: 100%;
@@ -286,28 +282,63 @@
       transition: width 0.3s ease;
     }
     
+    /* 문제 지문 대형화 */
     .question-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 18px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 16px;
       word-break: keep-all;
-      line-height: 1.5;
+      line-height: 1.45;
+      color: var(--text-main);
     }
+
+    /* 보기 선택지 대형화 및 배지 분리 */
     .option-btn {
-      font-size: 0.92rem;
-      border: 1.5px solid #e2e8f0;
-      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 1.12rem;
+      font-weight: 600;
+      border: 1.8px solid #cbd5e1;
+      line-height: 1.45;
+      padding: 13px 14px;
+      color: var(--text-main);
+    }
+    .opt-badge {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 26px;
+      height: 26px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .opt-text {
+      flex: 1;
     }
     .option-btn.correct {
       background-color: var(--correct-bg) !important;
       border-color: var(--correct-color) !important;
       color: var(--correct-color) !important;
-      font-weight: 700;
+      font-weight: 800;
+    }
+    .option-btn.correct .opt-badge {
+      background-color: var(--correct-color);
+      color: #ffffff;
     }
     .option-btn.incorrect {
       background-color: var(--incorrect-bg) !important;
       border-color: var(--incorrect-color) !important;
       color: var(--incorrect-color) !important;
+    }
+    .option-btn.incorrect .opt-badge {
+      background-color: var(--incorrect-color);
+      color: #ffffff;
     }
 
     /* 주관식 단답형 인풋 */
@@ -318,34 +349,36 @@
     }
     .short-input {
       flex: 1;
-      padding: 13px 15px;
+      padding: 13px 14px;
       border: 2px solid #cbd5e1;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 1.1rem;
       outline: none;
-      transition: border-color 0.2s;
+      font-weight: 600;
     }
     .short-input:focus {
       border-color: var(--primary-light);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
     .short-submit-btn {
-      width: 88px;
+      width: 90px;
       margin: 0;
       padding: 13px;
+      font-size: 1.05rem;
     }
     
     .explanation-box {
-      margin-top: 16px;
-      padding: 14px 16px;
+      margin-top: 14px;
+      padding: 14px;
       border-radius: 10px;
       background: #f8fafc;
-      border-left: 4px solid var(--primary-light);
-      font-size: 0.88rem;
+      border-left: 5px solid var(--primary-light);
+      font-size: 1.02rem;
+      font-weight: 500;
       display: none;
       word-break: keep-all;
       white-space: pre-line;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      line-height: 1.5;
     }
     
     .hidden { display: none !important; }
@@ -355,7 +388,7 @@
       padding: 10px 0;
     }
     .score-num {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 800;
       color: var(--primary-color);
       margin: 10px 0;
@@ -365,46 +398,49 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .review-item {
       text-align: left;
-      border-top: 1px solid #f1f5f9;
+      border-top: 1px solid #e2e8f0;
       padding: 14px 0;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
     .review-q {
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 6px;
       line-height: 1.45;
     }
     .review-ans {
       color: var(--correct-color);
       margin-bottom: 4px;
-      font-weight: 700;
+      font-weight: 800;
     }
     .review-exp {
       color: var(--text-muted);
-      font-size: 0.84rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- D-Day 카운트다운 배너 -->
-    <div class="dday-banner">
-      <div>
-        <div class="dday-title">🏆 골든벨 대회 2026.11.21(토)</div>
-        <div id="dday-time-detail" class="dday-sub">계산 중...</div>
+    <!-- 상단 배너 & 헤더 (퀴즈 풀이 시 자동으로 숨겨짐) -->
+    <div id="top-banner-group">
+      <div class="dday-banner">
+        <div>
+          <div class="dday-title">🏆 골든벨 대회 2026.11.21(토)</div>
+          <div id="dday-time-detail" class="dday-sub">계산 중...</div>
+        </div>
+        <div id="dday-badge" class="dday-badge">D-Day</div>
       </div>
-      <div id="dday-badge" class="dday-badge">D-Day</div>
-    </div>
 
-    <header>
-      <h1>가려뽑은기별 1권 골든벨 퀴즈</h1>
-      <p class="subtitle">목차별 정밀 학습 · 객관식/단답형 실전 훈련</p>
-    </header>
+      <header>
+        <h1>가려뽑은기별 1권 골든벨 퀴즈</h1>
+        <p class="subtitle">목차별 정밀 학습 · 객관식/단답형 실전 훈련</p>
+      </header>
+    </div>
 
     <!-- 1. 목차 선택 화면 -->
     <div id="chapter-screen">
@@ -416,7 +452,7 @@
               <input type="radio" name="quiz-type" value="multiple" checked> 객관식
             </label>
             <label class="mode-radio-label">
-              <input type="radio" name="quiz-type" value="short"> 주관식(단답형)
+              <input type="radio" name="quiz-type" value="short"> 단답형
             </label>
           </div>
         </div>
@@ -429,13 +465,13 @@
         </div>
       </div>
 
-      <div style="margin-bottom: 16px;">
+      <div style="margin-bottom: 14px;">
         <button id="stored-wrong-btn" onclick="startStoredWrongQuiz()" class="btn btn-danger hidden" style="text-align: center;">
           📑 누적 오답 보관함 풀기 (<span id="stored-wrong-count">0</span>문항)
         </button>
       </div>
 
-      <h2 style="font-size: 1.02rem; margin-bottom: 12px; color: var(--text-main);">풀고 싶은 단원을 선택하세요:</h2>
+      <h2 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--text-main); font-weight: 800;">풀고 싶은 단원을 선택하세요:</h2>
       <div id="chapter-list"></div>
     </div>
 
@@ -456,7 +492,7 @@
       </div>
 
       <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
-      <div id="question-number" style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 600;"></div>
+      <div id="question-number" style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700;"></div>
       <div id="question-text" class="question-title"></div>
       
       <!-- 객관식 보기 영역 -->
@@ -471,7 +507,7 @@
       </div>
 
       <div id="explanation-box" class="explanation-box"></div>
-      <button id="next-btn" class="btn btn-primary hidden" style="margin-top: 16px;">다음 문제</button>
+      <button id="next-btn" class="btn btn-primary hidden" style="margin-top: 14px;">다음 문제</button>
     </div>
 
     <!-- 3. 결과 화면 -->
@@ -479,7 +515,7 @@
       <div class="result-box">
         <h2>퀴즈 완료!</h2>
         <div id="score-text" class="score-num">0 / 0</div>
-        <p id="result-msg" style="margin-bottom: 16px; color: var(--text-muted);"></p>
+        <p id="result-msg" style="margin-bottom: 16px; color: var(--text-muted); font-size: 1.05rem; font-weight: 600;"></p>
         
         <div class="result-actions">
           <button id="retry-wrong-btn" onclick="startWrongOnlyQuiz()" class="btn btn-danger hidden">방금 틀린 문제 다시 풀기</button>
@@ -488,8 +524,8 @@
           <button onclick="showChapterScreen()" class="btn btn-primary">목차 화면으로 이동</button>
         </div>
 
-        <div id="review-container" class="hidden" style="margin-top: 24px; text-align: left;">
-          <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--incorrect-color);">틀린 문제 해설 목록</h3>
+        <div id="review-container" class="hidden" style="margin-top: 22px; text-align: left;">
+          <h3 style="font-size: 1.05rem; margin-bottom: 10px; color: var(--incorrect-color); font-weight: 800;">틀린 문제 해설 목록</h3>
           <div id="review-list"></div>
         </div>
       </div>
@@ -497,8 +533,8 @@
   </div>
 
   <script>
-    // D-Day 실시간 계산 (시험일: 2026-11-21 00:00:00)
-    const TARGET_DATE = new Date(2026, 10, 21, 0, 0, 0); // 월은 0부터 시작하므로 10 = 11월
+    // D-Day 실시간 계산 (시험일: 2026-11-21)
+    const TARGET_DATE = new Date(2026, 10, 21, 0, 0, 0);
 
     function updateDDay() {
       const now = new Date();
@@ -509,7 +545,7 @@
 
       if (diff <= 0) {
         badgeEl.innerText = "D-DAY";
-        detailEl.innerText = "오늘이 결전의 날입니다! 최선을 다하세요!";
+        detailEl.innerText = "오늘이 결전의 날입니다! 승리하세요!";
         return;
       }
 
@@ -1097,7 +1133,7 @@
       }
     };
 
-    const STORAGE_KEY = "goldenbell_wrong_questions_v2";
+    const STORAGE_KEY = "goldenbell_wrong_questions_v3";
 
     function getStoredWrongQuestions() {
       try {
@@ -1145,6 +1181,7 @@
     let timerInterval = null;
     let timeLeft = QUESTION_TIME_LIMIT;
 
+    const topBannerGroup = document.getElementById('top-banner-group');
     const chapterScreen = document.getElementById('chapter-screen');
     const quizScreen = document.getElementById('quiz-screen');
     const resultScreen = document.getElementById('result-screen');
@@ -1171,6 +1208,7 @@
 
     function showChapterScreen() {
       clearInterval(timerInterval);
+      topBannerGroup.classList.remove('hidden');
       chapterScreen.classList.remove('hidden');
       quizScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
@@ -1185,7 +1223,7 @@
         const btn = document.createElement('button');
         btn.className = 'btn btn-chapter';
         btn.innerHTML = `
-          <span><strong>${quizData[key].title}</strong></span>
+          <span>${quizData[key].title}</span>
           <span class="count-tag">${quizData[key].questions.length}문항</span>
         `;
         btn.onclick = () => startQuiz(key);
@@ -1249,13 +1287,15 @@
       score = 0;
       roundWrongQuestions = [];
       
-      let modeText = quizType === 'short' ? "주관식 단답형" : "객관식 셔플";
-      if (isWrongMode) modeText += " · 오답 복습";
-      if (isStoredMode) modeText += " · 누적 오답 집중";
+      let modeText = quizType === 'short' ? "단답형" : "객관식 셔플";
+      if (isWrongMode) modeText += " · 오답";
+      if (isStoredMode) modeText += " · 누적 오답";
       
       document.getElementById('quiz-mode-badge').innerText = modeText;
       document.getElementById('review-container').classList.add('hidden');
       
+      // 퀴즈 화면에서는 상단 헤더 숨겨서 문제 영역 극대화
+      topBannerGroup.classList.add('hidden');
       chapterScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
       quizScreen.classList.remove('hidden');
@@ -1299,7 +1339,10 @@
         shuffledOptions.forEach((opt, idx) => {
           const btn = document.createElement('button');
           btn.className = 'btn option-btn';
-          btn.innerText = `${idx + 1}. ${opt}`;
+          btn.innerHTML = `
+            <span class="opt-badge">${idx + 1}</span>
+            <span class="opt-text">${opt}</span>
+          `;
           btn.onclick = () => handleMultipleSelect(idx, newCorrectIndex, rawQ);
           optionsContainer.appendChild(btn);
         });
@@ -1414,6 +1457,7 @@
 
     function showResult() {
       clearInterval(timerInterval);
+      topBannerGroup.classList.remove('hidden');
       quizScreen.classList.add('hidden');
       resultScreen.classList.remove('hidden');
       

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>원룸 매니저</title>
+  <!-- Tailwind CSS & Lucide Icons CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [activeTab, setActiveTab] = useState('dashboard');
+
+      const [rooms] = useState([
+        { id: 101, status: 'occupied', deposit: 500, rent: 45, maintenance: 5 },
+        { id: 102, status: 'vacant', deposit: 500, rent: 40, maintenance: 5 },
+        { id: 201, status: 'occupied', deposit: 1000, rent: 50, maintenance: 5 },
+        { id: 202, status: 'repairing', deposit: 500, rent: 45, maintenance: 5 },
+      ]);
+
+      const [tenants] = useState([
+        { id: 1, roomId: 101, name: '김철수', phone: '010-1234-5678', startDate: '2025-03-01', endDate: '2027-02-28', paidStatus: 'paid' },
+        { id: 2, roomId: 201, name: '이영희', phone: '010-9876-5432', startDate: '2024-11-15', endDate: '2026-11-14', paidStatus: 'unpaid' },
+      ]);
+
+      const [repairs] = useState([
+        { id: 1, roomId: 202, title: '도어락 교체 및 수리', cost: 15, status: 'processing', date: '2026-09-20' },
+        { id: 2, roomId: 101, title: '에어컨 냉매 충전', cost: 8, status: 'completed', date: '2026-08-10' },
+      ]);
+
+      useEffect(() => {
+        if (window.lucide) window.lucide.createIcons();
+      }, [activeTab]);
+
+      const totalRooms = rooms.length;
+      const vacantRooms = rooms.filter(r => r.status === 'vacant').length;
+      const occupancyRate = (((totalRooms - vacantRooms) / totalRooms) * 100).toFixed(0);
+      const totalMonthlyIncome = rooms
+        .filter(r => r.status === 'occupied')
+        .reduce((acc, cur) => acc + cur.rent + cur.maintenance, 0);
+      const vacantLoss = rooms
+        .filter(r => r.status === 'vacant')
+        .reduce((acc, cur) => acc + cur.rent + cur.maintenance, 0);
+      const unpaidCount = tenants.filter(t => t.paidStatus === 'unpaid').length;
+
+      return (
+        <div className="min-h-screen flex flex-col md:flex-row">
+          {/* 모바일/PC 네비게이션 */}
+          <aside className="w-full md:w-64 bg-slate-900 text-white p-5 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <i data-lucide="building-2" className="text-indigo-400 w-8 h-8"></i>
+                <h1 className="font-bold text-xl">원룸 매니저</h1>
+              </div>
+              <nav className="flex md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0">
+                {[
+                  { id: 'dashboard', label: '대시보드', icon: 'building-2' },
+                  { id: 'rooms', label: '호실/공실', icon: 'wallet' },
+                  { id: 'tenants', label: '계약자 관리', icon: 'users' },
+                  { id: 'repairs', label: '수리/보수', icon: 'wrench' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition ${
+                      activeTab === tab.id ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-slate-800'
+                    }`}
+                  >
+                    <i data-lucide={tab.icon} className="w-4 h-4"></i>
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* 메인 콘텐츠 */}
+          <main className="flex-1 p-5 md:p-10">
+            {activeTab === 'dashboard' && (
+              <div className="space-y-6">
+                <h2 className="text-xl font-bold">건물 운영 요약</h2>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p className="text-xs text-slate-500 font-medium">가동률</p>
+                    <p className="text-2xl font-extrabold text-slate-900 mt-1">{occupancyRate}%</p>
+                    <p className="text-xs text-slate-400 mt-1">{totalRooms - vacantRooms}/{totalRooms} 세대 입주</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p className="text-xs text-slate-500 font-medium">예상 수입(월)</p>
+                    <p className="text-2xl font-extrabold text-indigo-600 mt-1">{totalMonthlyIncome}만</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p className="text-xs text-slate-500 font-medium">월세 미납</p>
+                    <p className="text-2xl font-extrabold text-rose-600 mt-1">{unpaidCount}건</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p className="text-xs text-slate-500 font-medium">공실 손실(월)</p>
+                    <p className="text-2xl font-extrabold text-amber-600 mt-1">-{vacantLoss}만</p>
+                  </div>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                  <h3 className="font-bold text-base mb-3 text-rose-600 flex items-center gap-1.5">
+                    <i data-lucide="alert-triangle" className="w-4 h-4"></i> 미납 세입자 확인
+                  </h3>
+                  {tenants.filter(t => t.paidStatus === 'unpaid').map(t => (
+                    <div key={t.id} className="p-3 bg-rose-50 rounded-xl flex justify-between items-center">
+                      <div>
+                        <span className="font-bold text-rose-900">{t.roomId}호 {t.name}</span>
+                        <p className="text-xs text-rose-700">월세 미납 중</p>
+                      </div>
+                      <a href={`tel:${t.phone}`} className="px-3 py-1.5 bg-rose-600 text-white text-xs font-semibold rounded-lg flex items-center gap-1">
+                        <i data-lucide="phone" className="w-3 h-3"></i> 전화
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'rooms' && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold">호실 현황</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {rooms.map(room => (
+                    <div key={room.id} className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                      <div>
+                        <h3 className="text-lg font-bold">{room.id}호</h3>
+                        <p className="text-xs text-slate-500">보증금 {room.deposit}만 / 월 {room.rent}만 (관리비 {room.maintenance}만)</p>
+                      </div>
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
+                        room.status === 'occupied' ? 'bg-emerald-100 text-emerald-700' :
+                        room.status === 'vacant' ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-700'
+                      }`}>
+                        {room.status === 'occupied' ? '입주 중' : room.status === 'vacant' ? '공실' : '수리 중'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'tenants' && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold">세입자 관리</h2>
+                <div className="space-y-3">
+                  {tenants.map(t => (
+                    <div key={t.id} className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                      <div>
+                        <p className="font-bold">{t.roomId}호 - {t.name} <span className="text-xs text-slate-400 font-normal">({t.phone})</span></p>
+                        <p className="text-xs text-slate-500">계약: {t.startDate} ~ {t.endDate}</p>
+                      </div>
+                      <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${
+                        t.paidStatus === 'paid' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                      }`}>
+                        {t.paidStatus === 'paid' ? '완납' : '미납'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'repairs' && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold">수리 내역</h2>
+                <div className="space-y-3">
+                  {repairs.map(r => (
+                    <div key={r.id} className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+                      <div>
+                        <p className="font-bold">{r.roomId}호: {r.title}</p>
+                        <p className="text-xs text-slate-400">비용: {r.cost}만원 | {r.date}</p>
+                      </div>
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
+                        r.status === 'completed' ? 'bg-slate-100 text-slate-600' : 'bg-indigo-100 text-indigo-700'
+                      }`}>
+                        {r.status === 'completed' ? '완료' : '진행 중'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </main>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

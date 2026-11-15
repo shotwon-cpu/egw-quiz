@@ -528,6 +528,7 @@
         <p id="result-msg" style="margin-bottom: 16px; color: var(--text-muted); font-size: 1.05rem; font-weight: 600;"></p>
         
         <div class="result-actions">
+          <button id="next-chapter-btn" onclick="goNextChapter()" class="btn btn-primary hidden">다음 주차로 →</button>
           <button id="retry-wrong-btn" onclick="startWrongOnlyQuiz()" class="btn btn-danger hidden">방금 틀린 문제 다시 풀기</button>
           <button onclick="retryCurrentQuiz()" class="btn btn-secondary">현재 모드로 다시 풀기 (셔플)</button>
           <button id="toggle-review-btn" onclick="toggleWrongReview()" class="btn btn-secondary hidden">오답 노트 확인하기</button>
@@ -8049,6 +8050,25 @@ function removeCorrectQuestionFromStorage(qId) {
       }
     };
 
+    // 목차 순서(quizData 키 순서)상 다음 단원/주차를 찾음
+function getNextChapterKey() {
+  if (isStoredMode || !currentChapterKey) return null;   // 누적 오답 풀이 중에는 숨김
+  const keys = Object.keys(quizData);
+  for (let i = keys.indexOf(currentChapterKey) + 1; i < keys.length; i++) {
+    const qs = quizData[keys[i]].questions;
+    const hasQuestions = quizType === 'short'
+      ? qs.some(q => Array.isArray(q.shortAnswers) && q.shortAnswers.length > 0)
+      : qs.length > 0;
+    if (hasQuestions) return keys[i];   // 단답형 모드에서 문제 없는 단원은 건너뜀
+  }
+  return null;                          // 마지막이면 버튼 숨김
+}
+
+function goNextChapter() {
+  const key = getNextChapterKey();
+  if (key) startQuiz(key);              // 현재 선택된 문제 유형(객관식/단답형)을 그대로 유지
+}
+    
     function showResult() {
       clearInterval(timerInterval);
       topBannerGroup.classList.remove('hidden');
@@ -8077,6 +8097,15 @@ function removeCorrectQuestionFromStorage(qId) {
       } else {
         retryWrongBtn.classList.add('hidden');
         toggleReviewBtn.classList.add('hidden');
+      }
+
+      const nextBtn = document.getElementById('next-chapter-btn');
+      const nextKey = getNextChapterKey();
+      if (nextKey) {
+        nextBtn.textContent = `다음: ${quizData[nextKey].title} →`;
+        nextBtn.classList.remove('hidden');
+      } else {
+        nextBtn.classList.add('hidden');
       }
       
       updateStoredWrongBtn();
